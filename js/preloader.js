@@ -8,7 +8,7 @@ function prepareWords(selector, wordClass) {
 
     const words = el.textContent.trim().split(/\s+/);
     el.innerHTML = words.map(word =>
-        `<span class="${wordClass}" style="display:inline-block; opacity:0; transform:translateY(20px); margin-right:0.25em;">${word}</span>`
+        `<span class="${wordClass}" style="display:inline-block; opacity:0; transform:translateY(40px); margin-right:0.25em;">${word}</span>`
     ).join("");
 
     const wordEls = el.querySelectorAll(`.${wordClass}`);
