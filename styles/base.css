@@ -12,7 +12,7 @@ body {
     scrollbar-width: none;
     background-color: #0c0c0c;
     color: #dfdfdf;
-    font-family: 'GCAkihiko', sans-serif;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
     overflow: hidden;
     overflow-x: hidden !important;
 }
@@ -67,4 +67,15 @@ body {
     .bg-grid {
         display: none; /* Simplifie le fond sur mobile */
     }
+}
+
+/* Display face — Fraunces (variable serif). Body = Instrument Sans (set on body). */
+#hero-name,
+.name-bold,
+.bio-text,
+.gallery-title,
+.card-title,
+.project-section-title,
+.project-subtitle {
+    font-family: 'Fraunces', Georgia, serif;
 }
