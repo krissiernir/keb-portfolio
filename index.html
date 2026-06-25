@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arthur Malan - Portfolio</title>
-    <link rel="icon" type="image/svg+xml" href="assets/img/ma_signature_orange_svg.svg">
+    <title>Kristján Ernir — Creative Production</title>
+    <link rel="icon" type="image/jpeg" href="assets/img/profile.jpg">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/preloader.css">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="top-nav-container">
-        <a href="assets/doc/CV_Arthur_Malan.pdf" target="_blank" id="cv-btn" title="Voir le CV">
+        <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="CV">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -57,10 +57,7 @@
         <button id="lang-toggle" title="Language">IS</button>
     </div>
 
-    <div class="logos-fixed-wrapper">
-        <img src="assets/img/UNIRENNES_LOGO_lumineu_orange.png" alt="Université de Rennes Logo" class="nav-logo">
-        <img src="assets/img/IUTRennes-GEII_orange.png" alt="IUT Rennes GEII Logo" class="nav-logo">
-    </div>
+    <div class="logos-fixed-wrapper"></div>
 
     <!-- Formes de découpe de l'image d'intro (sources : assets/shapes/, icônes Noun Project —
          "abstract shape" by Side Project, "quadrangle" by Viktor Vorobyev) : la croix en escalier
@@ -84,62 +81,52 @@
     <img id="intro-img" src="assets/img/intro.jpg" alt="Introduction">
 
     <nav id="intro-links">
-        <a href="#" id="intro-infos">infos</a>
-        <a href="#" id="intro-competences">compétences but2</a>
-        <a href="#" id="intro-projets">projets</a>
-        <a href="outils.html" target="_blank" rel="noopener" id="intro-outils">outils</a>
-        <a href="https://github.com/kirchhoffLawMastermind" target="_blank" rel="noopener">github</a>
-        <a href="https://www.linkedin.com/in/arthur-malan-/" target="_blank" rel="noopener">linkedin</a>
+        <a href="#" id="intro-infos" data-i18n="nav.info">info</a>
+        <a href="#" id="intro-projets" data-i18n="nav.work">work</a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener">instagram</a>
+        <a href="https://vimeo.com/" target="_blank" rel="noopener">vimeo</a>
     </nav>
 
     <section id="intro-text">
-        <p class="intro-paragraph">Tout commence par une curiosité : comprendre ce qui se cache derrière chaque circuit, chaque signal, chaque ligne de code. De la première LED allumée aux systèmes embarqués les plus complexes.</p>
+        <p class="intro-paragraph" data-i18n="intro.lead">Creative producer &amp; digital strategist — film, motion, and web that holds social value.</p>
     </section>
     <div id="info-modal" data-lenis-prevent>
         <div class="modal-content">
-
             <div class="info-card photo-card">
-
-                <img src="assets/img/profile.jpg" alt="Arthur Malan Portrait">
+                <img src="assets/img/profile.jpg" alt="Kristján Ernir Björgvinsson">
             </div>
-
-            <div class="info-card desc-card">
-                Étudiant en BUT GEII (Génie Électrique et Informatique Industrielle), je suis dédié à la construction de systèmes embarqués et d'interfaces pour la prochaine génération de l'électronique. Ma pratique intègre le hardware, la stratégie de code et la créativité pour créer des prototypes qui mobilisent des solutions concrètes.
+            <div class="info-card desc-card" data-i18n="bio.text">
+                I'm Kristján Ernir Björgvinsson, a cross-functional creative producer in Reykjavík.
             </div>
-
             <div class="info-card list-card">
-                <div class="card-title">Formation</div>
+                <div class="card-title" data-i18n="about.role">Creative Production</div>
                 <div class="list-content two-col">
-                    <div>Actuellement</div>
-                    <div>BUT GEII à l'IUT</div>
-                    <div>Précédemment</div>
-                    <div>Bac STI2D</div>
-                    <div>Spécialité</div>
-                    <div>Systèmes d'Information et Numérique</div>
+                    <div>Producer</div><div>Sentio</div>
+                    <div>Founder</div><div>SEK (2017–2024)</div>
+                    <div>PM</div><div>Eitt líf</div>
                 </div>
             </div>
-
             <div class="info-card list-card">
-                <div class="card-title">Contact & Liens</div>
+                <div class="card-title" data-i18n="about.contactTitle">Contact</div>
                 <div class="list-content two-col">
-                    <div style="color: #666;">Mail</div>
-                    <div><a href="mailto:arthur.malan@free.fr">arthur.malan@free.fr</a></div>
-                    <div style="color: #666;">Localisation</div>
-                    <div>Rennes, France</div>
-                    <div style="color: #666;">Social</div>
-                    <div><a href="https://linkedin.com/in/arthur-malan-">LinkedIn</a> &nbsp; <a href="https://github.com/kirchhoffLawMastermind">GitHub</a></div>
+                    <div style="color:#666;">Mail</div>
+                    <div><a href="mailto:krissiernir@reka.is">krissiernir@reka.is</a></div>
+                    <div style="color:#666;">Phone</div>
+                    <div>+354 777 3022</div>
+                    <div style="color:#666;" data-i18n="about.location">Reykjavík, Iceland</div>
+                    <div></div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="preloader">
-        <h1 id="hero-name" class="name-bold">Arthur Malan.</h1>
+        <h1 id="hero-name" class="name-bold">Kristján Ernir.</h1>
     </div>
     <main id="main-content">
         <section class="bio-section">
-            <p class="bio-text">
-                Étudiant en BUT GEII (Génie Électrique et Informatique Industrielle), je suis passionné par l'électronique, du prototypage jusqu'aux systèmes embarqués complexes en passant par l'automatisation.
+            <p class="bio-text" data-i18n="bio.text">
+                I'm Kristján Ernir Björgvinsson, a cross-functional creative producer in Reykjavík.
             </p>
         </section>
 

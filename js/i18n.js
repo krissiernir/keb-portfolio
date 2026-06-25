@@ -27,6 +27,10 @@ function apply() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = t(el.dataset.i18n);
   });
+  const cv = document.getElementById('cv-btn');
+  if (cv) cv.href = current === 'is'
+    ? 'assets/doc/Kristjan_ernir_ferilskra.pdf'
+    : 'assets/doc/CV_KristjanErnir_2025-ENG.pdf';
   window.KEB_LANG = current;
   document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: current } }));
 }
