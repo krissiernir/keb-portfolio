@@ -1,0 +1,98 @@
+[
+  {
+    "src": "assets/img/gallery/mishu-neon-01.jpg",
+    "title": { "is": "MISHU – Elska Allt", "en": "MISHU – Elska Allt" },
+    "tags": ["Tónlist"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/mishu-street-01.jpg",
+    "title": { "is": "MISHU – Elska Allt", "en": "MISHU – Elska Allt" },
+    "tags": ["Tónlist", "Kvikmynd"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/projects/eittlif-cover.jpg",
+    "title": { "is": "Eitt líf", "en": "Eitt líf" },
+    "tags": ["Hreyfimynd"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/hoddi-skemmtun-01.jpg",
+    "title": { "is": "Höddi 60 – Skemmtun & Hressing", "en": "Höddi 60 – Skemmtun & Hressing" },
+    "tags": ["Hreyfimynd", "Auglýsing"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/mekk-luxury-01.jpg",
+    "title": { "is": "Mekk – Lúxus vörumerkið", "en": "Mekk – Luxury Brand" },
+    "tags": ["Hreyfimynd", "Auglýsing"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/bjorninn-logoreveal-01.jpg",
+    "title": { "is": "Björninn – Lógóavslögun", "en": "Björninn – Logo Reveal" },
+    "tags": ["Hreyfimynd"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/nyja-stodin-blur-01.jpg",
+    "title": { "is": "Nýja stöðin – Blur", "en": "Nýja stöðin – Blur" },
+    "tags": ["Hreyfimynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/liquid-blur-typography-01.jpg",
+    "title": { "is": "Fljótandi blur leturgerð", "en": "Liquid Blur Typography" },
+    "tags": ["Hreyfimynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/oll-ljos-kveikt-01.jpg",
+    "title": { "is": "Öll ljós kveikt", "en": "Öll ljós kveikt" },
+    "tags": ["Kvikmynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/concert-hall-01.jpg",
+    "title": { "is": "Tónleikasal", "en": "Concert Hall" },
+    "tags": ["Stilla"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/medusa-01.jpg",
+    "title": { "is": "Medúsa", "en": "Medusa" },
+    "tags": ["Stilla", "Hreyfimynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/anime-lost-in-time-01.jpg",
+    "title": { "is": "Anime – Týnd í tíma", "en": "Anime – Lost in Time" },
+    "tags": ["Stilla", "Hreyfimynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/gallery/godarstundir-01.jpg",
+    "title": { "is": "Góðar stundir – Höddi", "en": "Góðar stundir – Höddi" },
+    "tags": ["Stilla", "Auglýsing"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/spacestation-01.jpg",
+    "title": { "is": "Spacestation Rolling Papers", "en": "Spacestation Rolling Papers" },
+    "tags": ["Stilla", "Auglýsing"],
+    "year": "2024"
+  },
+  {
+    "src": "assets/img/gallery/bauhaus-geometry-01.jpg",
+    "title": { "is": "Bauhaus hreyfigrafík", "en": "Bauhaus Motion Graphics" },
+    "tags": ["Hreyfimynd"],
+    "year": "2025"
+  },
+  {
+    "src": "assets/img/projects/music-cover.jpg",
+    "title": { "is": "MISHU – Tónlistarmyndband", "en": "MISHU – Music Video" },
+    "tags": ["Kvikmynd", "Tónlist"],
+    "year": "2024"
+  }
+]

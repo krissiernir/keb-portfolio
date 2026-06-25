@@ -1,0 +1,644 @@
+/* ─── gallery.css ──────────────────────────────────────────────────────────
+   Stillur — image gallery page for keb.is
+   Palette: bg #0a0a0a, ink #dfdfdf, accent #e8632a, muted #666
+   Font: GCAkihiko (from fonts.css)
+
+   Device mockup: each thumbnail is framed inside a minimal laptop/monitor
+   shell — dark aluminum bezel, 3-dot traffic-light bar (::before), 16:10 screen
+   with object-fit cover, and a slim deck/base beneath (::after).
+   All frames are identical so the grid reads unified regardless of source AR.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Reset adjustments for gallery page ── */
+.gallery-page {
+    overflow: visible;
+    overflow-x: hidden;
+    background: #0a0a0a;
+    color: #dfdfdf;
+    min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.gallery-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 52px;
+    background: #0a0a0a;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    gap: 1rem;
+}
+
+.gallery-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    transition: color 0.15s ease;
+    flex-shrink: 0;
+}
+
+.gallery-back svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.gallery-back:hover,
+.gallery-back:focus-visible {
+    color: #dfdfdf;
+    outline: none;
+}
+
+.gallery-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #dfdfdf;
+    text-align: center;
+    flex: 1;
+}
+
+.gallery-lang-toggle {
+    background: none;
+    border: 1px solid #2a2a2a;
+    color: #888;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.gallery-lang-toggle:hover,
+.gallery-lang-toggle:focus-visible {
+    border-color: #e8632a;
+    color: #dfdfdf;
+    outline: none;
+}
+
+/* ── Tag filter bar ──────────────────────────────────────────────────────── */
+.gallery-tag-bar {
+    position: sticky;
+    top: 52px;
+    z-index: 90;
+    background: #0a0a0a;
+    border-bottom: 1px solid #141414;
+    padding: 0.625rem 2rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gallery-tag-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.tag-btn {
+    background: none;
+    border: 1px solid #222;
+    color: #666;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 4px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    flex-shrink: 0;
+}
+
+.tag-btn:hover,
+.tag-btn:focus-visible {
+    border-color: #444;
+    color: #dfdfdf;
+    outline: none;
+}
+
+.tag-btn.active {
+    border-color: #e8632a;
+    color: #e8632a;
+    background: rgba(232, 99, 42, 0.07);
+}
+
+/* ── Main layout ─────────────────────────────────────────────────────────── */
+.gallery-main {
+    padding: 2.5rem 2rem 3rem;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* ── Gallery grid — uniform responsive, NOT masonry ────────────────────────
+   3 columns desktop, 2 tablet, 1 mobile. Every cell identical width.      */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   DEVICE MOCKUP
+   Each .gallery-item is styled as a minimal laptop / monitor shell.
+
+   Structure overview:
+     .gallery-item                  — the full laptop unit (wrapper)
+       ::before                     — top chrome bar with 3 traffic-light dots
+       .gallery-item (img area)     — 16:10 screen area via aspect-ratio
+       img                          — fills the screen with object-fit: cover
+       .gallery-item-overlay        — hover info overlay (over the screen)
+       ::after                      — slim deck/stand beneath the screen
+
+   Z-index map:
+     0  — img
+     1  — overlay
+     (::before / ::after are decorative, no stacking context needed)
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Device shell ── */
+.gallery-item {
+    /* Layout */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    /* Outer drop shadow — soft, warm-tinted to match near-black bg */
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7));
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* ── Hover lift + shadow intensify ── */
+.gallery-item:hover {
+    transform: translateY(-4px) scale(1.015);
+    filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.85));
+}
+
+/* ── Focus style — orange accent ring ── */
+.gallery-item:focus-visible {
+    outline: 2px solid #e8632a;
+    outline-offset: 4px;
+}
+
+/* ── Screen bezel + top bar container ── */
+.gallery-item-screen {
+    position: relative;
+    /* 16:10 aspect ratio for the screen area */
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #0d0d0d;
+
+    /* Bezel: dark aluminum — slightly lighter than bg */
+    border: 6px solid #1c1c1e;
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+
+    /* Inner screen glow — very subtle */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Traffic-light top bar */
+.gallery-item-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    background: #1c1c1e;
+    z-index: 3;
+
+    /* Three dots via box-shadow on a tiny pseudo-element seed */
+    /* We use background + radial-gradient to paint the dots */
+    background:
+        radial-gradient(circle 4px at 14px 11px, #ff5f57 100%, transparent 100%),
+        radial-gradient(circle 4px at 26px 11px, #febc2e 100%, transparent 100%),
+        radial-gradient(circle 4px at 38px 11px, #28c840 100%, transparent 100%),
+        #1c1c1e;
+}
+
+/* ── Image fills the screen below the top bar ── */
+.gallery-item-screen img {
+    position: absolute;
+    top: 22px; /* below the top bar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(100% - 22px);
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.5s ease;
+    transform: scale(1.04);
+    z-index: 0;
+}
+
+.gallery-item-screen img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── Hover overlay — sits inside the screen, above image ── */
+.gallery-item-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 22px; /* respect the top bar */
+    background: linear-gradient(to top,
+        rgba(8, 8, 8, 0.92) 0%,
+        rgba(8, 8, 8, 0.3) 50%,
+        transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.875rem 0.875rem 0.75rem;
+    z-index: 2;
+}
+
+.gallery-item-screen:hover .gallery-item-overlay,
+.gallery-item:focus-visible .gallery-item-overlay {
+    opacity: 1;
+}
+
+.gallery-item-info {
+    width: 100%;
+}
+
+.gallery-item-title {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #dfdfdf;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gallery-item-tags {
+    display: flex;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+}
+
+.gallery-item-tag {
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #e8632a;
+    border: 1px solid rgba(232, 99, 42, 0.4);
+    padding: 2px 6px;
+    line-height: 1.4;
+}
+
+/* ── Laptop deck / base ── */
+.gallery-item-base {
+    width: 100%;
+    position: relative;
+
+    /* Base height */
+    height: 14px;
+
+    /* Slightly wider than the screen — inset visual trick with padding */
+    background: linear-gradient(to bottom, #272727 0%, #1e1e1e 100%);
+    border-radius: 0 0 6px 6px;
+
+    /* Left/right bezel matching screen */
+    border-left: 6px solid #1c1c1e;
+    border-right: 6px solid #1c1c1e;
+    border-bottom: 5px solid #141414;
+
+    /* Subtle hinge line at the top of the base */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Tiny reflective strip across the base */
+.gallery-item-base::after {
+    content: '';
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 3px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 1px;
+}
+
+/* ── Skeleton placeholder — matches device mockup height ── */
+.gallery-skeleton {
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-skeleton-screen {
+    aspect-ratio: 16 / 10;
+    background: #111;
+    border: 6px solid #1c1c1e;
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+.gallery-skeleton-img {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+    background-size: 200% 100%;
+}
+
+.gallery-skeleton-base {
+    height: 14px;
+    background: linear-gradient(to bottom, #272727 0%, #1e1e1e 100%);
+    border-radius: 0 0 6px 6px;
+    border-left: 6px solid #1c1c1e;
+    border-right: 6px solid #1c1c1e;
+    border-bottom: 5px solid #141414;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .gallery-skeleton-img {
+        animation: skeleton-shimmer 1.5s infinite;
+    }
+}
+
+@keyframes skeleton-shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+/* Empty / error state */
+.gallery-empty {
+    grid-column: 1 / -1;
+    padding: 4rem 0;
+    text-align: center;
+    color: #444;
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+}
+
+/* ── Lightbox — unchanged: full raw image, no device frame ───────────────── */
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-lightbox[hidden] {
+    display: none;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.96);
+    cursor: pointer;
+}
+
+.lightbox-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 92vw;
+    max-height: 92vh;
+    padding: 0 3.5rem;
+}
+
+.lightbox-figure {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-height: 88vh;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.lightbox-caption {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lightbox-caption-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #dfdfdf;
+    letter-spacing: 0.03em;
+}
+
+.lightbox-caption-year {
+    font-size: 0.8125rem;
+    color: #555;
+    letter-spacing: 0.05em;
+}
+
+.lightbox-caption-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lightbox-tag {
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #e8632a;
+    border: 1px solid rgba(232, 99, 42, 0.4);
+    padding: 3px 8px;
+}
+
+/* Close button */
+.lightbox-close {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 202;
+    background: none;
+    border: 1px solid #2a2a2a;
+    color: #888;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 5px 12px 5px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.lightbox-close svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+    border-color: #e8632a;
+    color: #dfdfdf;
+    outline: none;
+}
+
+/* Prev / next navigation */
+.lightbox-nav {
+    position: relative;
+    z-index: 2;
+    background: none;
+    border: 1px solid #222;
+    color: #555;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.lightbox-nav svg {
+    width: 18px;
+    height: 18px;
+}
+
+.lightbox-nav:hover,
+.lightbox-nav:focus-visible {
+    border-color: #e8632a;
+    color: #dfdfdf;
+    outline: none;
+}
+
+/* Entry animation */
+@media (prefers-reduced-motion: no-preference) {
+    .gallery-lightbox:not([hidden]) .lightbox-content {
+        animation: lightbox-in 0.2s ease;
+    }
+
+    @keyframes lightbox-in {
+        from {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-header {
+        padding: 0 1.25rem;
+    }
+
+    .gallery-tag-bar {
+        padding: 0.5rem 1.25rem;
+    }
+
+    .gallery-main {
+        padding: 1.5rem 1.25rem 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .lightbox-content {
+        padding: 0 2.5rem;
+        gap: 0.75rem;
+    }
+
+    .lightbox-nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .lightbox-nav svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .gallery-back span {
+        display: none;
+    }
+
+    .lightbox-content {
+        padding: 0 2rem;
+    }
+}
+
+/* ── Reduced motion overrides ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .gallery-item {
+        transition: none;
+    }
+
+    .gallery-item:hover {
+        transform: none;
+        filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7));
+    }
+
+    .gallery-item-screen img {
+        transition: opacity 0.2s ease;
+        transform: none;
+    }
+
+    .gallery-item-screen img.loaded {
+        transform: none;
+    }
+
+    .gallery-item-overlay {
+        transition: none;
+    }
+}

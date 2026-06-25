@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stillur — Kristján Ernir</title>
+    <meta name="description" content="Kristján Ernir — myndasafn úr kvikmynda- og sjónvarpsverkefnum.">
+    <link rel="canonical" href="https://keb.is/gallery.html">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keb.is/gallery.html">
+    <meta property="og:title" content="Stillur — Kristján Ernir">
+    <meta property="og:description" content="Myndasafn úr kvikmynda- og sjónvarpsverkefnum Kristjáns Ernirs.">
+    <meta property="og:image" content="https://keb.is/assets/img/intro.jpg">
+    <meta property="og:locale" content="is_IS">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stillur — Kristján Ernir">
+    <meta name="twitter:description" content="Myndasafn úr kvikmynda- og sjónvarpsverkefnum Kristjáns Ernirs.">
+    <meta name="twitter:image" content="https://keb.is/assets/img/intro.jpg">
+    <link rel="icon" type="image/jpeg" href="assets/img/profile.jpg">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/gallery.css">
+</head>
+<body class="gallery-page">
+
+    <header class="gallery-header">
+        <a href="index.html" class="gallery-back" aria-label="Til baka á forsíðu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>til baka</span>
+        </a>
+
+        <h1 class="gallery-title" data-i18n="gallery.title">Stillur</h1>
+
+        <button id="lang-toggle" class="gallery-lang-toggle" title="Language">EN</button>
+    </header>
+
+    <div class="gallery-tag-bar" id="gallery-tag-bar" role="navigation" aria-label="Síun eftir flokkum">
+        <!-- Rendered by gallery.js -->
+    </div>
+
+    <main class="gallery-main" id="gallery-main">
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite" aria-label="Myndasafn">
+            <!-- Rendered by gallery.js -->
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="gallery-lightbox" class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Mynd í fullri stærð" hidden>
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Loka">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <span data-i18n="gallery.close">Loka</span>
+            </button>
+
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Fyrri mynd">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+
+            <figure class="lightbox-figure">
+                <img id="lightbox-img" src="" alt="" class="lightbox-img">
+                <figcaption class="lightbox-caption">
+                    <span id="lightbox-title" class="lightbox-caption-title"></span>
+                    <span id="lightbox-year" class="lightbox-caption-year"></span>
+                    <div id="lightbox-tags" class="lightbox-caption-tags"></div>
+                </figcaption>
+            </figure>
+
+            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Naesta mynd">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initI18n } from './js/i18n.js';
+        await initI18n();
+    </script>
+    <script src="js/gallery.js" defer></script>
+</body>
+</html>
