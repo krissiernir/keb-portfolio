@@ -1,0 +1,107 @@
+#intro-img {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20vw;
+    height: auto;
+    z-index: 5;
+    display: block;
+    will-change: width, top, transform, opacity;
+    pointer-events: none;
+    clip-path: url(#intro-clip); /* forme géométrique définie dans index.html, morphée au scroll par MorphSVG */
+    backface-visibility: hidden;
+    opacity: 0; /* caché dès le CSS pour éviter tout flash au chargement (GSAP le révèle) */
+}
+
+#intro-links {
+    position: fixed;
+    top: 2.5vh;
+    right: 21vw;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.6vh;
+    text-align: right;
+    opacity: 0; /* caché dès le CSS pour éviter tout flash au chargement (GSAP le révèle) */
+}
+
+#intro-links a {
+    color: #dfdfdf;
+    text-decoration: none;
+    font-size: 1vw;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.3s ease;
+}
+
+#intro-links a:hover {
+    color: #ff9d41;
+}
+
+#intro-text {
+    position: fixed;
+    top: 14vh;
+    right: 1vw;
+    width: 38vw;
+    z-index: 4;
+    padding: 0 0.5vw;
+    pointer-events: none;
+    visibility: hidden; /* masqué jusqu'à ce que JS découpe le texte en mots (évite le flash) */
+}
+
+.intro-paragraph {
+    font-size: 1.6vw;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.intro-word {
+    display: inline-block;
+    background: linear-gradient(to right, #bdbdbd, #ff9d41);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-repeat: no-repeat;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+@media (max-width: 1024px) {
+    #intro-text {
+        top: 12vh;
+        right: 4vw;
+        width: 55vw;
+    }
+    .intro-paragraph {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 768px) {
+    #intro-img {
+        width: 70vw;
+    }
+    #intro-links {
+        right: auto;
+        left: 5vw;
+        top: 3vh;
+        align-items: flex-start;
+        text-align: left;
+    }
+    #intro-links a {
+        font-size: 4vw;
+    }
+    #intro-text {
+        width: 90vw;
+        right: 5vw;
+    }
+    .intro-paragraph {
+        font-size: 5vw;
+        line-height: 1.3;
+    }
+}

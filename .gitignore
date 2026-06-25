@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+*.log
+.env
+
+# Secrets — never commit. Templates (*.example) ARE committed.
+.cloudflare.env
+.dev.vars
+*.local
+
+# SDD scratch
+.superpowers/

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthur Malan - Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/ma_signature_orange_svg.svg">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/preloader.css">
+    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/bio.css">
+    <link rel="stylesheet" href="styles/story.css">
+    <link rel="stylesheet" href="styles/project.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/pdf-viewer.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+</head>
+<body>
+
+    <div class="bg-grid">
+        <div class="line"><div class="border"></div></div>
+        <div class="line"><div class="border"></div></div>
+        <div class="line"><div class="border"></div></div>
+        <div class="line"><div class="border"></div></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="top-nav-container">
+        <a href="assets/doc/CV_Arthur_Malan.pdf" target="_blank" id="cv-btn" title="Voir le CV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+        </a>
+        <button id="info-btn">
+            <span>Infos</span>
+            <div class="icon-wrapper">
+                <div class="icon-container">
+                    <svg class="arrow-svg arrow-svg--main" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                    <svg class="arrow-svg arrow-svg--duplicate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <div class="logos-fixed-wrapper">
+        <img src="assets/img/UNIRENNES_LOGO_lumineu_orange.png" alt="Université de Rennes Logo" class="nav-logo">
+        <img src="assets/img/IUTRennes-GEII_orange.png" alt="IUT Rennes GEII Logo" class="nav-logo">
+    </div>
+
+    <!-- Formes de découpe de l'image d'intro (sources : assets/shapes/, icônes Noun Project —
+         "abstract shape" by Side Project, "quadrangle" by Viktor Vorobyev) : la croix en escalier
+         est morphée vers le quadrilatère organique par MorphSVG pendant le scroll.
+         clipPathUnits="objectBoundingBox" : coordonnées 0..1, la découpe suit le redimensionnement de l'image. -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <!-- Coordonnées en espace 0-100 ramenées en 0-1 par scale(0.01) : MorphSVG arrondit
+                 à 2 décimales, en espace 0-1 ça crée des sauts visibles de 1% à chaque frame.
+                 objectBoundingBox étire les coordonnées sur la largeur ET la hauteur : le scale x
+                 est divisé par le ratio de intro.jpg (4:3 → 0.01/1.3333 = 0.0075) et la forme est
+                 recentrée (translate 0.125) pour qu'elle garde ses proportions. À recalculer si
+                 intro.jpg change de ratio. -->
+            <clipPath id="intro-clip" clipPathUnits="objectBoundingBox">
+                <path id="intro-clip-path" transform="translate(0.125,0) scale(0.0075,0.01)" d="m 96.88,23.44 l -20.31,0 l 0,-20.31 c 0,-1.73 -1.4,-3.12 -3.12,-3.12 l -23.44,0 c -1.73,0 -3.12,1.4 -3.12,3.12 l 0,20.31 l -20.31,0 c -1.73,0 -3.12,1.4 -3.12,3.12 l 0,20.31 l -20.31,0 c -1.73,0 -3.12,1.4 -3.12,3.12 l 0,23.44 c 0,1.73 1.4,3.12 3.12,3.12 l 20.31,0 l 0,20.31 c 0,1.73 1.4,3.12 3.12,3.12 l 23.44,0 c 1.73,0 3.12,-1.4 3.12,-3.12 l 0,-20.31 l 20.31,0 c 1.73,0 3.12,-1.4 3.12,-3.12 l 0,-20.31 l 20.31,0 c 1.73,0 3.12,-1.4 3.12,-3.12 l 0,-23.44 c 0,-1.73 -1.4,-3.12 -3.12,-3.12 z"/>
+            </clipPath>
+            <path id="intro-clip-path-end" d="M 42.01,98.96 l 42.3,-13.93 C 94.55,81.62 101.08,71.11 99.85,59.81 l -4.19,-39.02 C 93.81,4.23 76.79,-5.1 62.97,2.92 l -51.55,30.22 c -11.1,6.57 -14.8,21.68 -8.02,33.11 L 16.85,88.97 C 22.15,97.91 32.51,102.11 42.01,98.96 z" fill="none"/>
+        </defs>
+    </svg>
+
+    <img id="intro-img" src="assets/img/intro.jpg" alt="Introduction">
+
+    <nav id="intro-links">
+        <a href="#" id="intro-infos">infos</a>
+        <a href="#" id="intro-competences">compétences but2</a>
+        <a href="#" id="intro-projets">projets</a>
+        <a href="outils.html" target="_blank" rel="noopener" id="intro-outils">outils</a>
+        <a href="https://github.com/kirchhoffLawMastermind" target="_blank" rel="noopener">github</a>
+        <a href="https://www.linkedin.com/in/arthur-malan-/" target="_blank" rel="noopener">linkedin</a>
+    </nav>
+
+    <section id="intro-text">
+        <p class="intro-paragraph">Tout commence par une curiosité : comprendre ce qui se cache derrière chaque circuit, chaque signal, chaque ligne de code. De la première LED allumée aux systèmes embarqués les plus complexes.</p>
+    </section>
+    <div id="info-modal" data-lenis-prevent>
+        <div class="modal-content">
+
+            <div class="info-card photo-card">
+
+                <img src="assets/img/profile.jpg" alt="Arthur Malan Portrait">
+            </div>
+
+            <div class="info-card desc-card">
+                Étudiant en BUT GEII (Génie Électrique et Informatique Industrielle), je suis dédié à la construction de systèmes embarqués et d'interfaces pour la prochaine génération de l'électronique. Ma pratique intègre le hardware, la stratégie de code et la créativité pour créer des prototypes qui mobilisent des solutions concrètes.
+            </div>
+
+            <div class="info-card list-card">
+                <div class="card-title">Formation</div>
+                <div class="list-content two-col">
+                    <div>Actuellement</div>
+                    <div>BUT GEII à l'IUT</div>
+                    <div>Précédemment</div>
+                    <div>Bac STI2D</div>
+                    <div>Spécialité</div>
+                    <div>Systèmes d'Information et Numérique</div>
+                </div>
+            </div>
+
+            <div class="info-card list-card">
+                <div class="card-title">Contact & Liens</div>
+                <div class="list-content two-col">
+                    <div style="color: #666;">Mail</div>
+                    <div><a href="mailto:arthur.malan@free.fr">arthur.malan@free.fr</a></div>
+                    <div style="color: #666;">Localisation</div>
+                    <div>Rennes, France</div>
+                    <div style="color: #666;">Social</div>
+                    <div><a href="https://linkedin.com/in/arthur-malan-">LinkedIn</a> &nbsp; <a href="https://github.com/kirchhoffLawMastermind">GitHub</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preloader">
+        <h1 id="hero-name" class="name-bold">Arthur Malan.</h1>
+    </div>
+    <main id="main-content">
+        <section class="bio-section">
+            <p class="bio-text">
+                Étudiant en BUT GEII (Génie Électrique et Informatique Industrielle), je suis passionné par l'électronique, du prototypage jusqu'aux systèmes embarqués complexes en passant par l'automatisation.
+            </p>
+        </section>
+
+        <section class="portfolio-wrapper">
+            <div class="cards-container">
+            </div>
+        </section>
+            </div>
+        </section>
+
+        <section id="project-view">
+            <div class="project-image-container">
+                <img id="project-view-img" src="" alt="Détails du projet">
+            </div>
+            <div class="project-info">
+                <div class="project-info-scroll" data-lenis-prevent>
+                    <div class="project-info-header">
+                        <h2 id="project-view-title"></h2>
+                        <p id="project-view-subtitle" class="project-subtitle"></p>
+                    </div>
+                    <div id="project-view-desc" class="project-desc"></div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">Apprentissages critiques</h3>
+                        <ul id="project-view-apprentissages" class="project-list"></ul>
+                    </div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">Résultats clés</h3>
+                        <ul id="project-view-resultats" class="project-list project-list--results"></ul>
+                    </div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">Preuves</h3>
+                        <div id="project-view-preuves" class="preuves-grid"></div>
+                    </div>
+
+                    <div class="project-section">
+                        <h3 class="project-section-title">Auto-évaluation</h3>
+                        <div id="project-view-autoevaluation" class="autoeval-grid"></div>
+                    </div>
+                    <div class="project-section" id="pdf-section">
+                        <h3 class="project-section-title">Rapport / Document</h3>
+                        <div class="pdf-trigger" id="pdf-trigger">
+                            <span class="pdf-trigger-label" id="pdf-label">—</span>
+                            <button class="pdf-trigger-btn">
+                                Voir
+                                <div class="pdf-trigger-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                                        <polyline points="7 7 17 7 17 17"></polyline>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <button id="close-project">Fermer le projet</button>
+            </div>
+        </section>
+    </main>
+    <!-- Modale sélecteur de projets PDF -->
+    <div id="projects-pdf-modal" data-lenis-prevent>
+        <div class="projects-pdf-overlay-bg"></div>
+        <div class="projects-pdf-content">
+            <div class="projects-pdf-header">
+                <span class="projects-pdf-title">Projets</span>
+                <button id="projects-pdf-close">
+                    Fermer
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="projects-pdf-grid" id="projects-pdf-grid"></div>
+        </div>
+    </div>
+
+    <!-- Modale PDF : s'ouvre par clic sur #pdf-trigger dans le panel projet -->
+    <div id="pdf-modal" data-lenis-prevent>
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-toolbar">
+                <span class="pdf-modal-label" id="pdf-modal-label"></span>
+                <div class="pdf-modal-actions">
+                    <a id="pdf-download" class="pdf-dl-btn" target="_blank" rel="noopener">Télécharger</a>
+                    <button id="pdf-modal-close">Fermer</button>
+                </div>
+            </div>
+            <object id="pdf-frame" data="" type="application/pdf" title="Document PDF">
+                <p class="pdf-fallback">Le PDF ne s'affiche pas dans votre navigateur. <a id="pdf-fallback-link" href="#" target="_blank" rel="noopener">Télécharger le fichier</a></p>
+            </object>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script src="js/pdf-viewer.js" defer></script>
+    <script src="js/projects-picker.js" defer></script>
+</body>
+</html>
+
+
+
