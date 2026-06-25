@@ -1,17 +1,7 @@
 (function () {
-  // Chemins réels des carnets, indexés sur l'id projet de projects.json
-  const PDF_PATHS = {
-    1: 'assets/doc/Carnet_CONCEVOIR_Arthur_Malan.pdf',
-    2: 'assets/doc/Carnet_VERIFIER_Arthur_Malan.pdf',
-    3: 'assets/doc/Carnet_MAINTENIR_Arthur_Malan.pdf',
-    4: 'assets/doc/Carnet_IMPLANTER_Arthur_Malan.pdf',
-  };
-  const PDF_LABELS = {
-    1: 'C1 — Concevoir',
-    2: 'C2 — Vérifier & Valider',
-    3: 'C3 — Maintenir',
-    4: 'C4 — Implanter & Mettre en service',
-  };
+  // populated elsewhere / currently unused
+  const PDF_PATHS = {};
+  const PDF_LABELS = {};
 
   const trigger       = document.getElementById('pdf-trigger');
   const modal         = document.getElementById('pdf-modal');
