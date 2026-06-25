@@ -1,3 +1,17 @@
+/* ─── cards.css ─────────────────────────────────────────────────────────────
+   Work-marquee cards — laptop device mockup to match gallery.css.
+
+   Device structure (mirrors .gallery-item):
+     .card                — outer laptop shell; GSAP targets this
+       .card-screen       — 16:10 bezel with ::before traffic-light bar
+         img              — cover image fills screen below the bar
+         .card-content    — hover overlay (title) over the screen
+       .card-base         — slim aluminum deck beneath screen
+
+   Landscape orientation: height ~40vh → width ~64vh (16:10 ratio).
+   The marquee auto-scrolls horizontally; wider cards are intentional.
+   ─────────────────────────────────────────────────────────────────────────── */
+
 .portfolio-wrapper {
     position: fixed;
     bottom: 2.5vh;
@@ -7,6 +21,7 @@
     padding-top: 2.5vh;
     margin-top: -2.5vh;
 }
+
 .cards-container {
     display: flex;
     gap: 0.75vw;
@@ -14,47 +29,167 @@
     width: max-content;
     will-change: transform;
 }
+
+/* ── Outer device shell ─────────────────────────────────────────────────── */
 .card {
     position: relative;
-    height: 40vh;
-    aspect-ratio: 2.4 / 3;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
-    border-radius: 10px;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Soft drop-shadow — warm-tinted like gallery */
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7));
+    transition: filter 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.card img {
+
+/* ── Hover lift — stays on .card so GSAP scale (is-selected) still applies */
+.card:hover {
+    transform: translateY(-4px) scale(1.015);
+    filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.85));
+}
+
+/* ── Selected state (GSAP adds .is-selected + scale(1.2)) ──────────────── */
+.card.is-selected {
+    filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.9));
+}
+
+/* ── Screen bezel ───────────────────────────────────────────────────────── */
+.card-screen {
+    position: relative;
+
+    /* 16:10 landscape screen; height set on .card via aspect-ratio chain */
+    /* Card height = 40vh; screen fills to that height leaving room for base */
+    height: 40vh;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #0d0d0d;
+
+    /* Dark aluminum bezel — matches gallery */
+    border: 6px solid #1c1c1e;
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+
+    /* Subtle inner screen glow */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Traffic-light chrome bar — identical to gallery */
+.card-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 22px;
+    z-index: 3;
+    background:
+        radial-gradient(circle 4px at 14px 11px, #ff5f57 100%, transparent 100%),
+        radial-gradient(circle 4px at 26px 11px, #febc2e 100%, transparent 100%),
+        radial-gradient(circle 4px at 38px 11px, #28c840 100%, transparent 100%),
+        #1c1c1e;
+    pointer-events: none;
+}
+
+/* ── Cover image — fills the screen below the top bar ─────────────────── */
+.card-screen img {
+    position: absolute;
+    top: 22px; /* below the top bar */
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 22px);
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                filter 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 0;
 }
+
+.card:hover .card-screen img {
+    transform: scale(1.05);
+    filter: brightness(70%);
+}
+
+/* ── Title overlay — fades in on hover like gallery overlay ────────────── */
 .card-content {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
-    padding: 2rem 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-    transform: translateY(100%);
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), background 0.5s;
-    font-size: 1.5rem;
-}
-.card:hover {
-    transform: translateY(-2vh);
-}
-.card:hover img {
-    transform: scale(1.05);
-    filter: brightness(70%);
-}
-.card:hover .card-content {
-    transform: translateY(0);
-    background: transparent;
+    right: 0;
+    top: 22px; /* respect the top bar */
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.875rem 1.25rem 1rem;
+
+    background: linear-gradient(to top,
+        rgba(8, 8, 8, 0.92) 0%,
+        rgba(8, 8, 8, 0.3) 45%,
+        transparent 75%
+    );
+
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+
+    font-size: 1.1rem;
+    color: #dfdfdf;
+    letter-spacing: 0.02em;
+
+    /* Prevent text selection during marquee drag */
+    user-select: none;
+    pointer-events: none;
 }
 
+.card:hover .card-content {
+    opacity: 1;
+}
+
+/* Mobile: always show title (no hover on touch) */
+@media (hover: none) {
+    .card-content {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(8, 8, 8, 0.8) 0%, transparent 60%);
+        font-size: 0.95rem;
+        padding: 0.75rem 0.875rem 0.75rem;
+    }
+}
+
+/* ── Laptop deck / base — identical to gallery-item-base ──────────────── */
+.card-base {
+    width: 100%;
+    position: relative;
+    height: 14px;
+
+    background: linear-gradient(to bottom, #272727 0%, #1e1e1e 100%);
+    border-radius: 0 0 6px 6px;
+
+    border-left: 6px solid #1c1c1e;
+    border-right: 6px solid #1c1c1e;
+    border-bottom: 5px solid #141414;
+
+    /* Subtle hinge line at top */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+/* Tiny reflective strip across the base */
+.card-base::after {
+    content: '';
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 3px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 1px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-    .card {
-        height: 35vh;
+    .card-screen {
+        height: 32vh;
     }
 }
 
@@ -62,18 +197,28 @@
     .portfolio-wrapper {
         bottom: 5vh;
     }
-    .card {
-        height: 30vh;
-        aspect-ratio: 2 / 3;
+    .card-screen {
+        height: 26vh;
     }
     .cards-container {
         gap: 3vw;
         padding-right: 3vw;
     }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+    .card:hover {
+        transform: none;
+        filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.7));
+    }
+    .card-screen img {
+        transition: none;
+    }
     .card-content {
-        font-size: 1.1rem;
-        padding: 1.5rem 1rem;
-        transform: translateY(0); /* Toujours visible sur mobile */
-        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        transition: none;
     }
 }

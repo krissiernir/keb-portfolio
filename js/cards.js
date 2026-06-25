@@ -13,8 +13,11 @@ export async function initCards() {
 
     container.innerHTML = projects.map(project => `
         <div class="card" data-project-id="${project.id}">
-            <img src="${project.cover}" alt="${project.title}">
-            <div class="card-content">${project.title}</div>
+            <div class="card-screen">
+                <img src="${project.cover}" alt="${project.title}">
+                <div class="card-content">${project.title}</div>
+            </div>
+            <div class="card-base"></div>
         </div>
     `).join("");
 
