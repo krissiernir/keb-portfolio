@@ -131,106 +131,68 @@
         gap: 2vw;
     }
     #cv-btn {
-        width: 8vw;
-        height: 8vw;
+        width: clamp(36px, 8vw, 56px);
+        height: clamp(36px, 8vw, 56px);
     }
     #cv-btn svg {
-        width: 4vw;
-        height: 4vw;
+        width: clamp(18px, 4vw, 28px);
+        height: clamp(18px, 4vw, 28px);
     }
     #info-btn {
-        padding: 1.5vw 1.5vw 1.5vw 4vw;
-        font-size: 3.2vw;
-        gap: 2vw;
+        padding: clamp(8px, 1.5vw, 14px) clamp(8px, 1.5vw, 14px) clamp(8px, 1.5vw, 14px) clamp(16px, 4vw, 28px);
+        font-size: clamp(13px, 3.2vw, 18px);
+        gap: clamp(8px, 2vw, 14px);
         border-radius: 9999px;
     }
     #info-btn span {
         display: inline-block;
     }
     #info-btn .icon-wrapper {
-        width: 10vw;
-        height: 10vw;
+        width: clamp(36px, 10vw, 56px);
+        height: clamp(36px, 10vw, 56px);
     }
     #info-btn .icon-container {
-        width: 4.5vw;
-        height: 4.5vw;
+        width: clamp(18px, 4.5vw, 28px);
+        height: clamp(18px, 4.5vw, 28px);
     }
-    
+
     .logos-fixed-wrapper {
         left: 5vw;
         width: 40vw;
         top: 4vw;
     }
     .nav-logo {
-        height: 6vw;
-    }
-    
-    .modal-content {
-        width: 85vw;
-    }
-    .desc-card {
-        font-size: 4vw;
-    }
-    .card-title {
-        font-size: 3vw;
-    }
-    .list-content {
-        font-size: 3.2vw;
-    }
-    .list-content.two-col {
-        column-gap: 4vw;
+        height: clamp(28px, 6vw, 42px);
     }
 }
 
 @media (max-width: 768px) {
     .logos-fixed-wrapper {
-        display: none; /* Cache les logos sur petit mobile pour libérer de l'espace */
+        display: none;
     }
     .top-nav-container {
-        top: 5vh;
-        right: 5vw;
+        top: clamp(16px, 5vh, 32px);
+        right: clamp(12px, 5vw, 24px);
     }
-    #cv-btn, #info-btn .icon-wrapper {
-        width: 12vw;
-        height: 12vw;
+    #cv-btn {
+        width: clamp(36px, 12vw, 48px);
+        height: clamp(36px, 12vw, 48px);
+    }
+    #info-btn .icon-wrapper {
+        width: clamp(36px, 12vw, 48px);
+        height: clamp(36px, 12vw, 48px);
     }
     #cv-btn svg {
-        width: 6vw;
-        height: 6vw;
-    }
-    #info-modal {
-        padding: 6vh 0;
-    }
-    .modal-content {
-        width: 92vw;
-        gap: 1.5vh;
-    }
-    .info-card {
-        padding: 3.5vh 6vw;
-        border-radius: 1.6vh;
-    }
-    .photo-card {
-        height: 42vh;
-    }
-    .desc-card {
-        font-size: 4.6vw;
-        line-height: 1.45;
-    }
-    .card-title {
-        font-size: 3.4vw;
-    }
-    .list-content {
-        font-size: 4.2vw;
-    }
-    .list-content.two-col {
-        column-gap: 5vw;
-        row-gap: 2vh;
+        width: clamp(18px, 6vw, 24px);
+        height: clamp(18px, 6vw, 24px);
     }
 }
 
 #info-btn:hover .arrow-svg--duplicate {
     transform: translate(100%, -100%);
 }
+
+/* ── Modal base rules — MUST come before @media blocks so mobile overrides win ── */
 
 #info-modal {
     position: fixed;
@@ -329,4 +291,67 @@
 
 .list-content a:hover {
     border-color: #fff;
+}
+
+/* ── Mobile overrides — declared AFTER base rules so cascade wins ── */
+
+@media (max-width: 1024px) {
+    .modal-content {
+        width: 85vw;
+        gap: clamp(10px, 2vh, 20px);
+    }
+    .info-card {
+        padding: clamp(18px, 4vh, 32px) clamp(18px, 4vw, 32px);
+    }
+    .desc-card {
+        font-size: clamp(16px, 4vw, 21px);
+    }
+    .card-title {
+        font-size: clamp(11px, 3vw, 15px);
+    }
+    .list-content {
+        font-size: clamp(15px, 3.2vw, 20px);
+    }
+    .list-content.two-col {
+        column-gap: clamp(12px, 4vw, 24px);
+    }
+}
+
+@media (max-width: 768px) {
+    #info-modal {
+        padding: clamp(24px, 6vh, 48px) 0;
+    }
+    .modal-content {
+        width: 92vw;
+        gap: clamp(10px, 2.5vw, 18px);
+    }
+    .info-card {
+        padding: clamp(20px, 5vw, 32px) clamp(18px, 5vw, 28px);
+        border-radius: clamp(12px, 3vw, 20px);
+    }
+    .photo-card {
+        height: clamp(180px, 42vw, 280px);
+    }
+    .desc-card {
+        font-size: clamp(16px, 4.6vw, 21px);
+        line-height: 1.5;
+    }
+    .card-title {
+        font-size: clamp(12px, 3.4vw, 15px);
+        letter-spacing: 0.08em;
+        margin-bottom: clamp(8px, 2vw, 14px);
+    }
+    .list-content {
+        font-size: clamp(16px, 4.4vw, 20px);
+        gap: clamp(6px, 1.5vw, 12px);
+    }
+    .list-content a {
+        font-size: clamp(16px, 4.4vw, 20px);
+        display: inline-block;
+        padding-bottom: 3px;
+    }
+    .list-content.two-col {
+        column-gap: clamp(12px, 5vw, 24px);
+        row-gap: clamp(8px, 2vw, 14px);
+    }
 }
