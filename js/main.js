@@ -3,7 +3,7 @@ import { initCards } from './cards.js';
 import { initModal } from './modal.js';
 import { initWatercolorReveal } from './watercolor-reveal.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+function boot() {
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -68,4 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     initCards().then(() => {
         initPreloader();
     });
-});
+}
+
+// index.html awaits initI18n() before importing this module, so DOMContentLoaded has
+// usually already fired by the time we get here — run boot() now if the DOM is ready,
+// otherwise wait for the event. (A plain DOMContentLoaded listener would never fire.)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+} else {
+    boot();
+}
