@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="is">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -647,7 +647,7 @@
                 <button class="cube-btn" data-cube="pyraminx">Pyraminx</button>
             </div>
             <button class="settings-btn" onclick="openSettings()">
-                Paramètres
+                Stillingar
             </button>
         </div>
     </header>
@@ -656,41 +656,41 @@
     <div class="modal" id="settingsModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Paramètres</h2>
+                <h2>Stillingar</h2>
                 <button class="close-modal" onclick="closeSettings()">×</button>
             </div>
 
             <div class="settings-section">
-                <h3>Thèmes Prédéfinis</h3>
+                <h3>Forskilgreindir þemur</h3>
                 <div id="themePresets"></div>
             </div>
 
             <div class="settings-section">
-                <h3>Personnalisation Avancée</h3>
+                <h3>Ítarleg sérsníðing</h3>
                 <div class="custom-colors-grid">
                     <div class="color-control">
-                        <label>Fond Principal</label>
+                        <label>Aðalbakgrunnur</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-bg-dark" value="#0a0a0f">
                             <input type="text" id="text-bg-dark" value="#0a0a0f">
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Fond Panneaux</label>
+                        <label>Spjaldsbakgrunnur</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-bg-panel" value="#13131a">
                             <input type="text" id="text-bg-panel" value="#13131a">
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Texte Principal</label>
+                        <label>Aðaltexti</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-text-primary" value="#e8e8ed">
                             <input type="text" id="text-text-primary" value="#e8e8ed">
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Texte Secondaire</label>
+                        <label>Aukatexti</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-text-secondary" value="#898993">
                             <input type="text" id="text-text-secondary" value="#898993">
@@ -704,21 +704,21 @@
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Vert (Prêt)</label>
+                        <label>Grænt (Tilbúið)</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-green" value="#00ff88">
                             <input type="text" id="text-green" value="#00ff88">
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Rouge (Maintien)</label>
+                        <label>Rautt (Hald)</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-red" value="#ff3366">
                             <input type="text" id="text-red" value="#ff3366">
                         </div>
                     </div>
                     <div class="color-control">
-                        <label>Bordures</label>
+                        <label>Rammar</label>
                         <div class="color-input-wrapper">
                             <input type="color" id="color-border" value="#1f1f28">
                             <input type="text" id="text-border" value="#1f1f28">
@@ -728,8 +728,8 @@
             </div>
 
             <div class="action-buttons">
-                <button class="btn btn-secondary" onclick="resetToDefault()">Réinitialiser</button>
-                <button class="btn btn-primary" onclick="applyCustomTheme()">Appliquer</button>
+                <button class="btn btn-secondary" onclick="resetToDefault()">Endurstilla</button>
+                <button class="btn btn-primary" onclick="applyCustomTheme()">Nota</button>
             </div>
         </div>
     </div>
@@ -737,13 +737,13 @@
     <div class="timer-container">
         <div class="scramble" id="scramble"></div>
         <div class="timer-display" id="timer">0.00</div>
-        <div class="instruction" id="instruction">Maintenez ESPACE ou cliquez pour démarrer</div>
+        <div class="instruction" id="instruction">Haltu BILI eða smelltu til að byrja</div>
     </div>
 
     <div class="stats-panel">
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">Record Personnel</div>
+                <div class="stat-label">Persónumet</div>
                 <div class="stat-value pb" id="pb">--</div>
             </div>
             <div class="stat-card">
@@ -755,11 +755,11 @@
                 <div class="stat-value" id="ao5">--</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Meilleur Ao3</div>
+                <div class="stat-label">Besta Ao3</div>
                 <div class="stat-value" id="pb-ao3">--</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Meilleur Ao5</div>
+                <div class="stat-label">Besta Ao5</div>
                 <div class="stat-value" id="pb-ao5">--</div>
             </div>
         </div>
@@ -767,8 +767,8 @@
 
     <div class="history-section">
         <div class="history-header">
-            <div class="history-title">Historique des temps</div>
-            <button class="clear-btn" id="clearBtn">Supprimer le dernier</button>
+            <div class="history-title">Tímasaga</div>
+            <button class="clear-btn" id="clearBtn">Eyða síðasta</button>
         </div>
         <div class="times-scroll" id="timesList"></div>
     </div>
@@ -777,8 +777,8 @@
         // Theme presets
         const themePresets = {
             'default': {
-                name: 'Cyber Bleu (Défaut)',
-                desc: 'Le thème classique du timer',
+                name: 'Cyber Blár (Sjálfgefið)',
+                desc: 'Klassíski þeminn',
                 colors: {
                     '--bg-dark': '#0a0a0a',
                     '--bg-panel': '#111111',
@@ -792,8 +792,8 @@
                 }
             },
             'purple': {
-                name: 'Violet Royal',
-                desc: 'Élégant et moderne',
+                name: 'Konungsfjólublár',
+                desc: 'Glæsilegur og nútímalegur',
                 colors: {
                     '--bg-dark': '#0f0a1f',
                     '--bg-panel': '#1a1329',
@@ -807,8 +807,8 @@
                 }
             },
             'ocean': {
-                name: 'Océan Profond',
-                desc: 'Calme et apaisant',
+                name: 'Djúphaf',
+                desc: 'Rólegur og friðsæll',
                 colors: {
                     '--bg-dark': '#0a1628',
                     '--bg-panel': '#0f1f38',
@@ -822,8 +822,8 @@
                 }
             },
             'sunset': {
-                name: 'Coucher de Soleil',
-                desc: 'Chaud et vibrant',
+                name: 'Sólsetur',
+                desc: 'Hlýtt og lifandi',
                 colors: {
                     '--bg-dark': '#1f0a0a',
                     '--bg-panel': '#2d1313',
@@ -837,8 +837,8 @@
                 }
             },
             'forest': {
-                name: 'Forêt Mystique',
-                desc: 'Nature et sérénité',
+                name: 'Leyndarmótsskógur',
+                desc: 'Náttúra og ró',
                 colors: {
                     '--bg-dark': '#0a1f0a',
                     '--bg-panel': '#132d13',
@@ -852,8 +852,8 @@
                 }
             },
             'cherry': {
-                name: 'Cerise Noire',
-                desc: 'Dramatique et intense',
+                name: 'Svartur kirsuber',
+                desc: 'Dramatískt og þétt',
                 colors: {
                     '--bg-dark': '#18070f',
                     '--bg-panel': '#250a17',
@@ -867,8 +867,8 @@
                 }
             },
             'monochrome': {
-                name: 'Monochrome',
-                desc: 'Minimaliste et épuré',
+                name: 'Einlitt',
+                desc: 'Hlutlægt og hreint',
                 colors: {
                     '--bg-dark': '#0a0a0a',
                     '--bg-panel': '#1a1a1a',
@@ -882,8 +882,8 @@
                 }
             },
             'neon': {
-                name: 'Néon Électrique',
-                desc: 'Énergie pure',
+                name: 'Rafrafsneón',
+                desc: 'Hreinn kraftur',
                 colors: {
                     '--bg-dark': '#000000',
                     '--bg-panel': '#0d0d0d',
@@ -1219,7 +1219,7 @@
         // Delete last time
         async function deleteLastTime() {
             if (sessionTimes.length === 0) {
-                alert('Aucun temps à supprimer');
+                alert('Enginn tími til að eyða');
                 return;
             }
             
@@ -1283,7 +1283,7 @@
                 div.className = 'time-item';
                 if (time === bestTime) div.classList.add('best');
                 div.textContent = formatTime(time);
-                div.title = `Temps #${sessionTimes.length - index}`;
+                div.title = `Tími #${sessionTimes.length - index}`;
                 timesList.appendChild(div);
             });
         }

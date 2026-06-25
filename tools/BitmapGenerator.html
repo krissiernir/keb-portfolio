@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="is">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -485,50 +485,50 @@
   <div class="panel">
 
     <div>
-      <div class="section-label">Bibliothèque cible</div>
+      <div class="section-label">Marksafn</div>
       <div id="libList" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <div class="section-label">Taille de l'image</div>
+      <div class="section-label">Stærð myndar</div>
       <div class="row" style="margin-bottom:8px">
         <div>
-          <label>Largeur (px)</label>
+          <label>Breidd (px)</label>
           <input type="number" id="widthInput" value="32" min="1" max="1000">
         </div>
         <div>
-          <label>Hauteur (px)</label>
+          <label>Hæð (px)</label>
           <input type="number" id="heightInput" value="32" min="1" max="1000">
         </div>
       </div>
-      <div class="section-label" style="margin-top:8px">Résolutions normalisées</div>
+      <div class="section-label" style="margin-top:8px">Staðlaðar stærðir</div>
       <div class="preset-grid" id="presetGrid"></div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <div class="section-label">Options d'export</div>
+      <div class="section-label">Útflutningsstillingar</div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <div>
-          <label>Nom de la variable</label>
+          <label>Breytunafn</label>
           <input type="text" id="varName" value="myBitmap">
         </div>
         <div>
-          <label>Format des données</label>
+          <label>Gagnasniðmát</label>
           <select id="dataFormat">
-            <option value="hex">Hexadécimal (0xFF)</option>
-            <option value="bin">Binaire (0b11001100)</option>
-            <option value="dec">Décimal</option>
+            <option value="hex">Sextándakerfi (0xFF)</option>
+            <option value="bin">Tvíundakerfi (0b11001100)</option>
+            <option value="dec">Tugakerfi</option>
           </select>
         </div>
         <div>
           <label>Bit order</label>
           <select id="bitOrder">
-            <option value="msb">MSB d'abord</option>
-            <option value="lsb">LSB d'abord</option>
+            <option value="msb">MSB fyrst</option>
+            <option value="lsb">LSB fyrst</option>
           </select>
         </div>
       </div>
@@ -538,16 +538,16 @@
 
     <div>
       <div class="stat-row"><span>Pixels ON</span><span class="stat-val" id="statOn">0</span></div>
-      <div class="stat-row" style="margin-top:4px"><span>Taille (bytes)</span><span class="stat-val" id="statBytes">0</span></div>
+      <div class="stat-row" style="margin-top:4px"><span>Stærð (bytes)</span><span class="stat-val" id="statBytes">0</span></div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <div class="section-label">Importer une image</div>
+      <div class="section-label">Flytja inn mynd</div>
       <div class="import-drop" id="importDrop">
         <input type="file" id="importFile" accept="image/*" onchange="handleImageFile(this.files[0])">
-        <div class="drop-text">Glisser une image ou cliquer</div>
+        <div class="drop-text">Dragðu mynd hingað eða smelltu</div>
         <div class="drop-hint">PNG · JPG · GIF · WebP · BMP · SVG</div>
       </div>
       <div id="importPreviewBlock" style="display:none;margin-top:8px">
@@ -555,7 +555,7 @@
           <img id="importThumb" class="import-thumb" src="" alt="">
           <div class="import-info" id="importInfo"></div>
         </div>
-        <button class="btn btn-primary" style="margin-top:8px" onclick="openImportModal()">Configurer la conversion</button>
+        <button class="btn btn-primary" style="margin-top:8px" onclick="openImportModal()">Stilla umbreytingu</button>
       </div>
     </div>
 
@@ -564,69 +564,69 @@
   <!-- IMPORT MODAL -->
   <div class="modal-bg" id="importModal">
     <div class="modal">
-      <div class="modal-title">Options de conversion</div>
+      <div class="modal-title">Umbreytingastillingar</div>
       <div class="modal-preview-row">
         <div>
           <div class="modal-canvas-wrap" style="width:128px;height:128px;display:flex;align-items:center;justify-content:center">
             <canvas id="modalPreviewCanvas" width="128" height="128"></canvas>
           </div>
-          <div style="font-size:10px;color:var(--ink3);text-align:center;margin-top:4px;font-family:'Space Mono',monospace">aperçu converti</div>
+          <div style="font-size:10px;color:var(--ink3);text-align:center;margin-top:4px;font-family:'Space Mono',monospace">forskoðun</div>
         </div>
         <div class="modal-controls">
           <div class="opt-row">
-            <label>Mode couleur</label>
+            <label>Litastilling</label>
             <select id="convMode" onchange="updateModalPreview()">
-              <option value="color">Couleur (RGBA)</option>
-              <option value="mono">Monochrome (1-bit)</option>
-              <option value="gray">Niveaux de gris</option>
+              <option value="color">Litur (RGBA)</option>
+              <option value="mono">Eilitumál (1-bit)</option>
+              <option value="gray">Grátt</option>
             </select>
           </div>
           <div class="opt-row" id="thresholdRow">
-            <label>Seuil mono : <span id="thresholdVal">128</span></label>
+            <label>Þröskuldur : <span id="thresholdVal">128</span></label>
             <input type="range" id="thresholdSlider" min="0" max="255" value="128" step="1" oninput="document.getElementById('thresholdVal').textContent=this.value;updateModalPreview()">
           </div>
           <div class="opt-row">
-            <label>Algorithme de dithering</label>
+            <label>Dithering-reikniritið</label>
             <select id="convDither" onchange="updateModalPreview()">
-              <option value="none">Aucun (seuil simple)</option>
+              <option value="none">Ekkert (einfaldur þröskuldur)</option>
               <option value="fs">Floyd-Steinberg</option>
-              <option value="ordered">Ordonné (Bayer 4×4)</option>
+              <option value="ordered">Raðað (Bayer 4×4)</option>
               <option value="atkinson">Atkinson</option>
             </select>
           </div>
           <div class="opt-row">
-            <label>Redimensionner à</label>
+            <label>Stærðarbreyting</label>
             <select id="convSize" onchange="updateModalPreview()">
-              <option value="canvas">Taille du canevas (actuelle)</option>
-              <option value="fit">Ajuster proportionnellement</option>
-              <option value="stretch">Étirer (distorsion)</option>
+              <option value="canvas">Stærð strigans (núverandi)</option>
+              <option value="fit">Passa hlutfallslega</option>
+              <option value="stretch">Teygja (skekking)</option>
             </select>
           </div>
           <div class="opt-row">
-            <label>Transparence</label>
+            <label>Gegnsæi</label>
             <select id="convAlpha" onchange="updateModalPreview()">
-              <option value="keep">Conserver (canal alpha)</option>
-              <option value="white">Fond blanc</option>
-              <option value="black">Fond noir</option>
-              <option value="threshold">Seuil alpha (50%)</option>
+              <option value="keep">Varðveita (alpha-rás)</option>
+              <option value="white">Hvítur bakgrunnur</option>
+              <option value="black">Svartur bakgrunnur</option>
+              <option value="threshold">Alpha-þröskuldur (50%)</option>
             </select>
           </div>
           <div class="opt-row">
-            <label>Luminosité / Contraste</label>
+            <label>Birtustig / Skerpa</label>
             <div style="display:flex;gap:8px">
               <input type="range" id="convBright" min="-100" max="100" value="0" step="1" oninput="document.getElementById('brightVal').textContent=this.value;updateModalPreview()" style="flex:1">
               <input type="range" id="convContrast" min="-100" max="100" value="0" step="1" oninput="document.getElementById('contrastVal').textContent=this.value;updateModalPreview()" style="flex:1">
             </div>
             <div style="display:flex;gap:8px;font-size:10px;color:var(--ink3);font-family:'Space Mono',monospace">
-              <span style="flex:1;text-align:center">luminosité: <span id="brightVal">0</span></span>
-              <span style="flex:1;text-align:center">contraste: <span id="contrastVal">0</span></span>
+              <span style="flex:1;text-align:center">birtustig: <span id="brightVal">0</span></span>
+              <span style="flex:1;text-align:center">skerpa: <span id="contrastVal">0</span></span>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-foot">
-        <button class="btn btn-secondary" onclick="closeImportModal()">Annuler</button>
-        <button class="btn btn-primary" onclick="applyImport()">Appliquer au canevas</button>
+        <button class="btn btn-secondary" onclick="closeImportModal()">Hætta við</button>
+        <button class="btn btn-primary" onclick="applyImport()">Nota á striga</button>
       </div>
     </div>
   </div>
@@ -635,21 +635,21 @@
   <div class="canvas-area">
 
     <div class="toolbar">
-      <button class="tool-btn active" id="toolPen" onclick="setTool('pen')">Crayon</button>
-      <button class="tool-btn" id="toolErase" onclick="setTool('erase')">Gomme</button>
-      <button class="tool-btn" id="toolFill" onclick="setTool('fill')">Remplir</button>
-      <button class="tool-btn" id="toolLine" onclick="setTool('line')">Ligne</button>
-      <button class="tool-btn" id="toolRect" onclick="setTool('rect')">Rectangle</button>
-      <button class="tool-btn" id="toolCircle" onclick="setTool('circle')">Cercle</button>
-      <button class="tool-btn" id="toolGradient" onclick="setTool('gradient')">Dégradé</button>
+      <button class="tool-btn active" id="toolPen" onclick="setTool('pen')">Penni</button>
+      <button class="tool-btn" id="toolErase" onclick="setTool('erase')">Strokleður</button>
+      <button class="tool-btn" id="toolFill" onclick="setTool('fill')">Fylla</button>
+      <button class="tool-btn" id="toolLine" onclick="setTool('line')">Lína</button>
+      <button class="tool-btn" id="toolRect" onclick="setTool('rect')">Rétthyrningur</button>
+      <button class="tool-btn" id="toolCircle" onclick="setTool('circle')">Hringur</button>
+      <button class="tool-btn" id="toolGradient" onclick="setTool('gradient')">Litastig</button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" onclick="invertColors()" title="Inverser">Inverser</button>
-      <button class="tool-btn" onclick="shiftLeft()">← Décaler</button>
-      <button class="tool-btn" onclick="shiftRight()">→ Décaler</button>
-      <button class="tool-btn" onclick="shiftUp()">↑ Décaler</button>
-      <button class="tool-btn" onclick="shiftDown()">↓ Décaler</button>
+      <button class="tool-btn" onclick="invertColors()" title="Snúa við">Snúa við</button>
+      <button class="tool-btn" onclick="shiftLeft()">← Hliðra</button>
+      <button class="tool-btn" onclick="shiftRight()">→ Hliðra</button>
+      <button class="tool-btn" onclick="shiftUp()">↑ Hliðra</button>
+      <button class="tool-btn" onclick="shiftDown()">↓ Hliðra</button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" id="toggleGrid" onclick="toggleGridLines()" title="Grille">Grille</button>
+      <button class="tool-btn" id="toggleGrid" onclick="toggleGridLines()" title="Rist">Rist</button>
       <input type="range" id="zoomSlider" min="4" max="24" value="14" step="1" style="width:80px;cursor:pointer" title="Zoom" oninput="setZoom(this.value)">
     </div>
 
@@ -660,12 +660,12 @@
     <div style="width:100%;max-width:800px">
       <div class="preview-wrap">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div class="section-label" style="margin-bottom:0">Prévisualisation sur écrans</div>
+          <div class="section-label" style="margin-bottom:0">Forskoðun á skjám</div>
           <div style="display:flex;align-items:center;gap:6px">
             <input type="number" id="prevCustomW" placeholder="W" min="1" max="1000" style="width:62px;padding:4px 6px;font-size:11px">
             <span style="font-size:11px;color:var(--ink3)">×</span>
             <input type="number" id="prevCustomH" placeholder="H" min="1" max="1000" style="width:62px;padding:4px 6px;font-size:11px">
-            <button class="tool-btn" style="padding:4px 8px;font-size:11px" onclick="addCustomScreen()">+ Ajouter</button>
+            <button class="tool-btn" style="padding:4px 8px;font-size:11px" onclick="addCustomScreen()">+ Bæta við</button>
           </div>
         </div>
         <div class="preview-screens" id="previewScreens"></div>
@@ -678,7 +678,7 @@
   <div class="panel">
 
     <div>
-      <div class="section-label">Couleur active</div>
+      <div class="section-label">Virki liturinn</div>
       <div class="color-wheel-wrap">
         <canvas id="colorWheel" width="240" height="240"></canvas>
       </div>
@@ -686,74 +686,74 @@
       <div class="color-preview-row">
         <div class="color-swatch" id="colorSwatch"></div>
         <input type="text" class="hex-input" id="hexInput" value="#00FF00" placeholder="#RRGGBB" oninput="updateFromHex()">
-        <input type="color" id="nativeColorPicker" style="width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;border-radius:6px;overflow:hidden" oninput="updateFromNative(this.value)" title="Importer une couleur">
+        <input type="color" id="nativeColorPicker" style="width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;border-radius:6px;overflow:hidden" oninput="updateFromNative(this.value)" title="Velja lit">
       </div>
 
       <div style="margin-top:10px">
-        <div class="section-label">Palette rapide</div>
+        <div class="section-label">Skyndipaletta</div>
         <div class="palette-row" id="paletteRow"></div>
       </div>
 
       <div id="gradientControls" style="display:none;margin-top:10px">
-        <div class="section-label">Dégradé — couleur 2</div>
+        <div class="section-label">Litastig — litur 2</div>
         <div class="color-preview-row" style="margin-bottom:8px">
           <div class="color-swatch" id="gradSwatch" style="background:#0000FF"></div>
           <input type="text" class="hex-input" id="gradHexInput" value="#0000FF" placeholder="#RRGGBB" oninput="updateGradColor()">
-          <input type="color" id="gradNativePicker" style="width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;overflow:hidden" value="#0000FF" oninput="updateGradColorNative(this.value)" title="Couleur 2">
+          <input type="color" id="gradNativePicker" style="width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0;overflow:hidden" value="#0000FF" oninput="updateGradColorNative(this.value)" title="Litur 2">
         </div>
         <div>
-          <label>Direction</label>
+          <label>Stefna</label>
           <select id="gradDir">
-            <option value="h">Horizontal (gauche → droite)</option>
-            <option value="v">Vertical (haut → bas)</option>
+            <option value="h">Láréttur (vinstri → hægri)</option>
+            <option value="v">Lóðréttur (upp → niður)</option>
             <option value="d1">Diagonal ↘</option>
             <option value="d2">Diagonal ↗</option>
-            <option value="r">Radial (centre → bord)</option>
+            <option value="r">Radíalt (miðja → jaðar)</option>
           </select>
         </div>
         <div style="margin-top:6px">
-          <label>Appliquer à</label>
+          <label>Nota á</label>
           <select id="gradScope">
-            <option value="canvas">Tout le canevas</option>
-            <option value="drag">Zone glissée (clic + drag)</option>
+            <option value="canvas">Allan strigann</option>
+            <option value="drag">Valið svæði (smella + draga)</option>
           </select>
         </div>
-        <button class="btn btn-primary" style="margin-top:8px" onclick="applyGradientFull()">Appliquer sur le canevas</button>
+        <button class="btn btn-primary" style="margin-top:8px" onclick="applyGradientFull()">Nota á strigann</button>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div>
-      <div class="section-label">Code généré</div>
-      <div class="code-block mono" id="codeOutput">// Dessinez des pixels pour générer le code</div>
+      <div class="section-label">Myndaður kóði</div>
+      <div class="code-block mono" id="codeOutput">// Teiknaðu pixla til að búa til kóða</div>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:8px">
       <div>
-        <div class="section-label">Taille d'export PNG</div>
+        <div class="section-label">Útflutningsstærð PNG</div>
         <div style="display:flex;gap:6px;align-items:center">
           <select id="exportSizeMode" onchange="toggleExportCustom()" style="flex:1">
-            <option value="native">Taille native (1:1)</option>
+            <option value="native">Upprunaleg stærð (1:1)</option>
             <option value="2x">×2</option>
             <option value="4x">×4</option>
             <option value="8x">×8</option>
-            <option value="custom">Personnalisée…</option>
+            <option value="custom">Sérsniðin…</option>
           </select>
         </div>
         <div id="exportCustomRow" style="display:none;margin-top:6px;display:none">
           <div style="display:flex;gap:6px;align-items:center">
-            <input type="number" id="exportCustomW" placeholder="Largeur" min="1" max="10000" style="flex:1">
+            <input type="number" id="exportCustomW" placeholder="Breidd" min="1" max="10000" style="flex:1">
             <span style="color:var(--ink3);font-size:12px">×</span>
-            <input type="number" id="exportCustomH" placeholder="Hauteur" min="1" max="10000" style="flex:1">
+            <input type="number" id="exportCustomH" placeholder="Hæð" min="1" max="10000" style="flex:1">
           </div>
-          <div style="font-size:10px;color:var(--ink3);margin-top:3px;font-family:'Space Mono',monospace">laisser vide pour auto-proportionnel</div>
+          <div style="font-size:10px;color:var(--ink3);margin-top:3px;font-family:'Space Mono',monospace">skilja eftir autt fyrir sjálfvirkt hlutfall</div>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="downloadBMP()">Télécharger PNG</button>
-      <button class="btn btn-secondary" onclick="downloadHeader()">Télécharger .h</button>
-      <button class="btn btn-secondary" onclick="copyCode()">Copier le code</button>
-      <button class="btn btn-danger" onclick="clearCanvas()">Effacer tout</button>
+      <button class="btn btn-primary" onclick="downloadBMP()">Sækja PNG</button>
+      <button class="btn btn-secondary" onclick="downloadHeader()">Sækja .h</button>
+      <button class="btn btn-secondary" onclick="copyCode()">Afrita kóða</button>
+      <button class="btn btn-danger" onclick="clearCanvas()">Hreinsa allt</button>
     </div>
 
   </div>
@@ -781,7 +781,7 @@ const LIBS = [
   { id: 'u8g2',    name: 'U8g2',         sub: 'drawXBM / mono only', mcu: 'AVR/ESP' },
   { id: 'tft_espi',name: 'TFT_eSPI',     sub: 'pushImage / RGB565', mcu: 'ESP32/ESP8266' },
   { id: 'lvgl',    name: 'LVGL',         sub: 'lv_img_dsc_t / LV_IMG', mcu: 'ESP/STM32' },
-  { id: 'raw',     name: 'Raw C array',  sub: 'uint8_t[] générique', mcu: 'Tous' },
+  { id: 'raw',     name: 'Raw C array',  sub: 'uint8_t[] almenn', mcu: 'Allt' },
 ];
 
 const PRESETS = [
@@ -1365,7 +1365,7 @@ function updatePreviews() {
       span.textContent = s.label;
       span.style.cursor = 'pointer';
       span.style.color = 'var(--danger)';
-      span.title = 'Supprimer';
+      span.title = 'Fjarlægja';
       span.onclick = () => { SCREENS.splice(idx, 1); updatePreviews(); };
       lbl.appendChild(span);
     } else {
@@ -1437,8 +1437,8 @@ function copyCode() {
   navigator.clipboard.writeText(document.getElementById('codeOutput').textContent)
     .then(() => {
       const btn = document.querySelector('.btn-secondary');
-      btn.textContent = 'Copié !';
-      setTimeout(() => btn.textContent = 'Copier le code', 1500);
+      btn.textContent = 'Afritað!';
+      setTimeout(() => btn.textContent = 'Afrita kóða', 1500);
     });
 }
 
@@ -1456,7 +1456,7 @@ function handleImageFile(file) {
       // Show thumbnail
       document.getElementById('importThumb').src = e.target.result;
       document.getElementById('importInfo').innerHTML =
-        `Fichier : ${file.name}<br>Taille orig : ${img.width}×${img.height}<br>Type : ${file.type || 'image/*'}`;
+        `Skrá: ${file.name}<br>Upprunaleg stærð: ${img.width}×${img.height}<br>Tegund: ${file.type || 'image/*'}`;
       document.getElementById('importPreviewBlock').style.display = 'block';
     };
     img.src = e.target.result;
