@@ -35,6 +35,7 @@ export async function initCards() {
 
     function renderProjectDetails(project) {
         document.getElementById("project-view-title").textContent = project.title;
+        document.getElementById("project-view-img").alt = project.title;
         document.getElementById("project-view-meta").textContent =
             [project.role, project.year].filter(Boolean).join(' · ');
         document.getElementById("project-view-summary").textContent = pick(project.summary);

@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="is">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kristján Ernir — Creative Production</title>
+    <meta name="description" content="Kristján Ernir — framleiðandi í Reykjavík. Kvikmyndir, hreyfimyndir og vefur.">
+    <link rel="canonical" href="https://keb.is/">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keb.is/">
+    <meta property="og:title" content="Kristján Ernir — Creative Production">
+    <meta property="og:description" content="Framleiðandi í Reykjavík. Kvikmyndir, hreyfimyndir og vefur.">
+    <meta property="og:image" content="https://keb.is/assets/img/intro.jpg">
+    <meta property="og:locale" content="is_IS">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kristján Ernir — Creative Production">
+    <meta name="twitter:description" content="Framleiðandi í Reykjavík. Kvikmyndir, hreyfimyndir og vefur.">
+    <meta name="twitter:image" content="https://keb.is/assets/img/intro.jpg">
     <link rel="icon" type="image/jpeg" href="assets/img/profile.jpg">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="styles/base.css">
@@ -31,7 +45,7 @@
     </div>
 
     <div class="top-nav-container">
-        <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="CV">
+        <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="Ferilskrá" aria-label="Sækja ferilskrá">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -137,9 +151,9 @@
         <div class="projects-pdf-overlay-bg"></div>
         <div class="projects-pdf-content">
             <div class="projects-pdf-header">
-                <span class="projects-pdf-title">Documents</span>
+                <span class="projects-pdf-title">Skjöl</span>
                 <button id="projects-pdf-close">
-                    Fermer
+                    Loka
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -156,12 +170,12 @@
             <div class="pdf-modal-toolbar">
                 <span class="pdf-modal-label" id="pdf-modal-label"></span>
                 <div class="pdf-modal-actions">
-                    <a id="pdf-download" class="pdf-dl-btn" target="_blank" rel="noopener">Download</a>
-                    <button id="pdf-modal-close">Close</button>
+                    <a id="pdf-download" class="pdf-dl-btn" target="_blank" rel="noopener">Sækja</a>
+                    <button id="pdf-modal-close">Loka</button>
                 </div>
             </div>
-            <object id="pdf-frame" data="" type="application/pdf" title="Document PDF">
-                <p class="pdf-fallback">The PDF cannot be displayed in your browser. <a id="pdf-fallback-link" href="#" target="_blank" rel="noopener">Download the file</a></p>
+            <object id="pdf-frame" data="" type="application/pdf" title="PDF skjal">
+                <p class="pdf-fallback">Ekki er hægt að birta PDF í vafranum. <a id="pdf-fallback-link" href="#" target="_blank" rel="noopener">Sækja skrána</a></p>
             </object>
         </div>
     </div>
