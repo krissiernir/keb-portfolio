@@ -7,5 +7,10 @@
   "about.role": "Skapandi framleiðsla",
   "about.contactTitle": "Hafðu samband",
   "about.location": "Reykjavík, Ísland",
-  "project.close": "Loka verkefni"
+  "project.close": "Loka verkefni",
+  "project.background": "Bakgrunnur",
+  "project.approach": "Nálgun",
+  "project.outcome": "Niðurstaða",
+  "nav.docs": "skjöl",
+  "nav.tools": "verkfæri"
 }

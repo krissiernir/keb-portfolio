@@ -7,5 +7,10 @@
   "about.role": "Creative Production",
   "about.contactTitle": "Contact",
   "about.location": "Reykjavík, Iceland",
-  "project.close": "Close project"
+  "project.close": "Close project",
+  "project.background": "Background",
+  "project.approach": "Approach",
+  "project.outcome": "Outcome",
+  "nav.docs": "documents",
+  "nav.tools": "tools"
 }

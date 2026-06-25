@@ -38,6 +38,16 @@ export async function initCards() {
         document.getElementById("project-view-meta").textContent =
             [project.role, project.year].filter(Boolean).join(' · ');
         document.getElementById("project-view-summary").textContent = pick(project.summary);
+        document.getElementById("project-view-problem").textContent = pick(project.problem);
+        document.getElementById("project-view-approach").textContent = pick(project.approach);
+        document.getElementById("project-view-outcome").textContent = pick(project.outcome);
+        const videoEl = document.getElementById("project-view-video");
+        videoEl.innerHTML = project.video
+            ? `<iframe src="${project.video}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+            : '';
+        const linksEl = document.getElementById("project-view-links");
+        linksEl.innerHTML = Object.entries(project.links || {})
+            .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`).join('');
 
         const scrollEl = document.querySelector('.project-info-scroll');
         if (scrollEl) scrollEl.scrollTop = 0;
@@ -97,7 +107,7 @@ export async function initCards() {
 
         if (container.dataset.dockActive === "true" && imgEl.src.endsWith(project.cover.split('/').pop())) {
             const swapTl = gsap.timeline();
-            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary"];
+            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary", "#project-view-problem", "#project-view-approach", "#project-view-outcome", "#project-view-video", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
@@ -110,7 +120,7 @@ export async function initCards() {
 
         if (container.dataset.dockActive === "true") {
             const swapTl = gsap.timeline();
-            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary"];
+            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary", "#project-view-problem", "#project-view-approach", "#project-view-outcome", "#project-view-video", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
