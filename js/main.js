@@ -49,15 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Liens en texte brut de l'intro
     const introInfos = document.getElementById("intro-infos");
-    const introCompetences = document.getElementById("intro-competences");
+    const introProjets = document.getElementById("intro-projets");
     if (introInfos) {
         introInfos.addEventListener("click", (e) => {
             e.preventDefault();
             document.getElementById("info-btn").click();
         });
     }
-    if (introCompetences) {
-        introCompetences.addEventListener("click", (e) => {
+    if (introProjets) {
+        introProjets.addEventListener("click", (e) => {
             e.preventDefault();
             lenis.scrollTo(window.innerHeight * 4.0, { duration: 2 });
         });
