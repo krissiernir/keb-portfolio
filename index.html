@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/story.css">
     <link rel="stylesheet" href="styles/project.css">
     <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/clients.css">
+    <link rel="stylesheet" href="styles/reel.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js"></script>
@@ -81,6 +81,7 @@
     <img id="intro-img" src="assets/img/intro.jpg" alt="Introduction">
 
     <nav id="intro-links">
+        <a href="#" id="intro-reel-link" data-i18n="nav.reel">showreel</a>
         <a href="#" id="intro-infos" data-i18n="nav.info">info</a>
         <a href="#" id="intro-projets" data-i18n="nav.work">work</a>
         <a href="https://www.instagram.com/" target="_blank" rel="noopener">instagram</a>
@@ -120,6 +121,14 @@
         </div>
     </div>
 
+    <div id="reel-modal" data-lenis-prevent>
+        <div class="reel-modal-overlay"></div>
+        <div class="reel-modal-content">
+            <button id="reel-modal-close" aria-label="Close">&times;</button>
+            <video id="reel-video" src="assets/video/reel.mp4" controls playsinline preload="metadata"></video>
+        </div>
+    </div>
+
     <div class="preloader">
         <h1 id="hero-name" class="name-bold">Kristján Ernir.</h1>
     </div>
@@ -130,10 +139,6 @@
             </p>
         </section>
 
-        <section class="reel-section">
-            <video id="intro-reel" src="assets/video/reel.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        </section>
-
         <section class="portfolio-wrapper">
             <div class="cards-container">
             </div>
@@ -141,15 +146,9 @@
             </div>
         </section>
 
-        <section class="clients-section">
-            <h3 class="clients-heading" data-i18n="clients.heading">Trusted by</h3>
-            <div class="clients-grid" id="clients-grid"></div>
-        </section>
-
         <section id="project-view">
             <div class="project-image-container">
                 <img id="project-view-img" src="" alt="">
-                <div id="project-view-video"></div>
             </div>
             <div class="project-info">
                 <div class="project-info-scroll" data-lenis-prevent>
@@ -158,39 +157,16 @@
                         <p id="project-view-meta" class="project-subtitle"></p>
                     </div>
                     <div id="project-view-summary" class="project-desc"></div>
-
-                    <div class="project-section">
-                        <h3 class="project-section-title" data-i18n="project.background">Background</h3>
-                        <div id="project-view-problem" class="project-desc"></div>
-                    </div>
-                    <div class="project-section">
-                        <h3 class="project-section-title" data-i18n="project.approach">Approach</h3>
-                        <div id="project-view-approach" class="project-desc"></div>
-                    </div>
-                    <div class="project-section">
-                        <h3 class="project-section-title" data-i18n="project.outcome">Outcome</h3>
-                        <div id="project-view-outcome" class="project-desc"></div>
-                    </div>
-                    <div class="project-section" id="links-section">
-                        <ul id="project-view-links" class="project-list"></ul>
-                    </div>
                 </div>
                 <button id="close-project" data-i18n="project.close">Close project</button>
             </div>
         </section>
     </main>
-    <footer class="site-footer">
-        <h3 class="footer-title" data-i18n="footer.getInTouch">Get in touch</h3>
-        <p class="footer-contact">
-            <a href="mailto:krissiernir@reka.is">krissiernir@reka.is</a> · +354 777 3022 · Reykjavík
-        </p>
-        <p class="footer-copy">© <span id="footer-year"></span> Kristján Ernir Björgvinsson</p>
-    </footer>
     <script type="module">
       import { initI18n } from './js/i18n.js';
       await initI18n();
       await import('./js/main.js');
     </script>
-    <script src="js/clients.js" defer></script>
+    <script src="js/reel.js" defer></script>
 </body>
 </html>

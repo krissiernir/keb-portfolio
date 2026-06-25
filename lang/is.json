@@ -1,15 +1,11 @@
 {
   "nav.info": "um mig",
   "nav.work": "verkefni",
+  "nav.reel": "sýnishorn",
   "intro.lead": "Skapandi framleiðandi og stafrænn stefnumótandi — kvikmyndir, hreyfimyndir og vefur með samfélagslegt gildi.",
   "bio.text": "Ég heiti Kristján Ernir Björgvinsson, þverfaglegur skapandi framleiðandi í Reykjavík. Verkin mín liggja á mörkum tækni, frásagnar og mannlegrar upplifunar — frá heimildaþáttum í landsdreifingu til stafrænnar stefnumótunar með samfélagslegt gildi.",
   "about.role": "Skapandi framleiðsla",
   "about.contactTitle": "Hafðu samband",
   "about.location": "Reykjavík, Ísland",
-  "clients.heading": "Samstarfsaðilar",
-  "project.background": "Bakgrunnur",
-  "project.approach": "Nálgun",
-  "project.outcome": "Niðurstaða",
-  "project.close": "Loka verkefni",
-  "footer.getInTouch": "Hafðu samband"
+  "project.close": "Loka verkefni"
 }

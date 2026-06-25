@@ -1,0 +1,5 @@
+#reel-modal { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.reel-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.85); opacity: 0; }
+.reel-modal-content { position: relative; width: min(92vw, 1200px); opacity: 0; }
+#reel-video { width: 100%; height: auto; display: block; border-radius: 12px; background: #000; }
+#reel-modal-close { position: absolute; top: -2.6rem; right: 0; background: none; border: 0; color: #fff; font-size: 2.2rem; line-height: 1; cursor: pointer; }
