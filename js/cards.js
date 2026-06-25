@@ -112,7 +112,7 @@ export async function initCards() {
             const swapTl = gsap.timeline();
             const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary",
                              "#project-view-problem", "#project-view-approach",
-                             "#project-view-outcome", "#project-view-links"];
+                             "#project-view-outcome", "#project-view-video", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
@@ -127,7 +127,7 @@ export async function initCards() {
             const swapTl = gsap.timeline();
             const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary",
                              "#project-view-problem", "#project-view-approach",
-                             "#project-view-outcome", "#project-view-links"];
+                             "#project-view-outcome", "#project-view-video", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
