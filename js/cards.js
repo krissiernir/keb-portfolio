@@ -13,7 +13,7 @@ export async function initCards() {
 
     container.innerHTML = projects.map(project => `
         <div class="card" data-project-id="${project.id}">
-            <img src="${project.image}" alt="${project.title}">
+            <img src="${project.cover}" alt="${project.title}">
             <div class="card-content">${project.title}</div>
         </div>
     `).join("");
@@ -28,55 +28,33 @@ export async function initCards() {
     window.isProjectOpen = false;
 
 
+    function pick(field) {
+        const lang = window.KEB_LANG || 'en';
+        return (field && (field[lang] || field.en || field.is)) || '';
+    }
+
     function renderProjectDetails(project) {
         document.getElementById("project-view-title").textContent = project.title;
-        document.getElementById("project-view-subtitle").textContent = project.subtitle || '';
-        const descEl = document.getElementById("project-view-desc");
-        const desc = project.description;
-        if (Array.isArray(desc)) {
-            descEl.innerHTML = desc.map(item => {
-                if (typeof item === 'string') return `<p>${item}</p>`;
-                if (item.img) {
-                    const cap = item.caption ? `<span class="desc-img-caption">${item.caption}</span>` : '';
-                    return `<figure class="desc-img-wrap"><img src="${item.img}" alt="${item.caption || ''}" class="desc-img">${cap}</figure>`;
-                }
-                return '';
-            }).join('');
-        } else {
-            descEl.textContent = desc;
-        }
+        document.getElementById("project-view-meta").textContent =
+            [project.role, project.year].filter(Boolean).join(' · ');
+        document.getElementById("project-view-summary").textContent = pick(project.summary);
+        document.getElementById("project-view-problem").textContent = pick(project.problem);
+        document.getElementById("project-view-approach").textContent = pick(project.approach);
+        document.getElementById("project-view-outcome").textContent = pick(project.outcome);
 
-        document.getElementById("project-view-apprentissages").innerHTML =
-            project.apprentissages.map(a => `<li>${a}</li>`).join('');
+        const videoEl = document.getElementById("project-view-video");
+        videoEl.innerHTML = project.video
+            ? `<iframe src="${project.video}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+            : '';
 
-        document.getElementById("project-view-resultats").innerHTML =
-            project.resultats_cles.map(r => `<li>${r}</li>`).join('');
-
-        document.getElementById("project-view-preuves").innerHTML =
-            project.preuves.map(p => `
-                <div class="preuve-item">
-                    <span class="preuve-ref">${p.ref}</span>
-                    <div class="preuve-details">
-                        <div class="preuve-intitule">${p.intitule}</div>
-                        <div class="preuve-meta">${p.source}, ${p.date}</div>
-                    </div>
-                </div>
-            `).join('');
-
-        document.getElementById("project-view-autoevaluation").innerHTML =
-            Object.entries(project.auto_evaluation).map(([key, val]) => {
-                const label = key.replace(/_/g, ' ');
-                const cls = val === "Tout à fait d'accord" ? 'val-high' : 'val-medium';
-                return `
-                    <div class="autoeval-item">
-                        <span class="autoeval-key">${label}</span>
-                        <span class="autoeval-val ${cls}">${val}</span>
-                    </div>
-                `;
-            }).join('');
+        const linksEl = document.getElementById("project-view-links");
+        linksEl.innerHTML = Object.entries(project.links || {})
+            .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`)
+            .join('');
 
         const scrollEl = document.querySelector('.project-info-scroll');
         if (scrollEl) scrollEl.scrollTop = 0;
+        window.currentProject = project;
     }
 
     container.addEventListener("click", (e) => {
@@ -130,15 +108,15 @@ export async function initCards() {
 
         container.dataset.isOpen = "true";
 
-        if (container.dataset.dockActive === "true" && imgEl.src.endsWith(project.image.split('/').pop())) {
+        if (container.dataset.dockActive === "true" && imgEl.src.endsWith(project.cover.split('/').pop())) {
             const swapTl = gsap.timeline();
-            const infoEls = ["#project-view-title", "#project-view-subtitle", "#project-view-desc",
-                             "#project-view-apprentissages", "#project-view-resultats",
-                             "#project-view-preuves", "#project-view-autoevaluation"];
+            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary",
+                             "#project-view-problem", "#project-view-approach",
+                             "#project-view-outcome", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
-                    imgEl.src = project.image;
+                    imgEl.src = project.cover;
                     renderProjectDetails(project);
                 })
                 .to([imgEl, ...infoEls], { opacity: 1, duration: 0.3, y: 0 });
@@ -147,13 +125,13 @@ export async function initCards() {
 
         if (container.dataset.dockActive === "true") {
             const swapTl = gsap.timeline();
-            const infoEls = ["#project-view-title", "#project-view-subtitle", "#project-view-desc",
-                             "#project-view-apprentissages", "#project-view-resultats",
-                             "#project-view-preuves", "#project-view-autoevaluation"];
+            const infoEls = ["#project-view-title", "#project-view-meta", "#project-view-summary",
+                             "#project-view-problem", "#project-view-approach",
+                             "#project-view-outcome", "#project-view-links"];
             swapTl
                 .to([imgEl, ...infoEls], { opacity: 0, duration: 0.3, y: 15 })
                 .call(() => {
-                    imgEl.src = project.image;
+                    imgEl.src = project.cover;
                     renderProjectDetails(project);
                 })
                 .to([imgEl, ...infoEls], { opacity: 1, duration: 0.3, y: 0 });
@@ -161,7 +139,7 @@ export async function initCards() {
         }
 
         container.dataset.dockActive = "true";
-        imgEl.src = project.image;
+        imgEl.src = project.cover;
         renderProjectDetails(project);
 
         tl.to(["#hero-name", ".bio-section"], {
@@ -266,5 +244,9 @@ export async function initCards() {
 
         requestAnimationFrame(render);
     }
+    document.addEventListener('langchange', () => {
+        if (window.isProjectOpen && window.currentProject) renderProjectDetails(window.currentProject);
+    });
+
     requestAnimationFrame(render);
 }

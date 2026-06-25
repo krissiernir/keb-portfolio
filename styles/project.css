@@ -335,3 +335,6 @@ body.project-open #project-view {
         padding-top: 10vh;
     }
 }
+
+#project-view-video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; margin-top: 1rem; }
+#project-view-links a { text-decoration: underline; }
