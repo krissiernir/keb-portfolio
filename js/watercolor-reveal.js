@@ -97,6 +97,7 @@ uniform vec3 uBg;
 uniform float uDisplacement;
 uniform float uTime;
 uniform vec2 uResolution;
+uniform float uScrollReveal;
 ${NOISE}
 
 float paper(vec2 uv) {
@@ -110,6 +111,11 @@ float paper(vec2 uv) {
 
 void main() {
     float mask = texture2D(uMask, vUv).r;
+
+    // Scroll-driven wash: reveals the background in organic noise patches as the
+    // user scrolls through the middle of the story (uScrollReveal peaks there).
+    float wash = uScrollReveal * smoothstep(0.2, 0.9, fbm(vUv * 3.5 + uTime * 0.04));
+    mask = max(mask, wash);
 
     vec2 pUv = vUv * vec2(uResolution.x / uResolution.y, 1.0);
     float pap = paper(pUv);
@@ -177,7 +183,7 @@ export function initWatercolorReveal() {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.__watercolorReady) return;
 
-    if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) return;
+    const isMobile = !!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
 
     const canvas = document.createElement('canvas');
     canvas.id = 'watercolor-canvas';
@@ -219,7 +225,8 @@ export function initWatercolorReveal() {
         uBg: gl.getUniformLocation(renderProg, 'uBg'),
         uDisplacement: gl.getUniformLocation(renderProg, 'uDisplacement'),
         uTime: gl.getUniformLocation(renderProg, 'uTime'),
-        uResolution: gl.getUniformLocation(renderProg, 'uResolution')
+        uResolution: gl.getUniformLocation(renderProg, 'uResolution'),
+        uScrollReveal: gl.getUniformLocation(renderProg, 'uScrollReveal')
     };
 
     const imgTex = gl.createTexture();
@@ -251,12 +258,13 @@ export function initWatercolorReveal() {
     }
 
     function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
         canvas.width = Math.floor(window.innerWidth * dpr);
         canvas.height = Math.floor(window.innerHeight * dpr);
 
-        const mw = Math.max(2, Math.floor(canvas.width * CONFIG.maskScale));
-        const mh = Math.max(2, Math.floor(canvas.height * CONFIG.maskScale));
+        const maskScale = isMobile ? 0.34 : CONFIG.maskScale;
+        const mw = Math.max(2, Math.floor(canvas.width * maskScale));
+        const mh = Math.max(2, Math.floor(canvas.height * maskScale));
         targets.forEach((t) => {
             gl.deleteTexture(t.tex);
             gl.deleteFramebuffer(t.fbo);
@@ -295,6 +303,12 @@ export function initWatercolorReveal() {
         const time = (performance.now() - start) * 0.001;
         const gate = window.preloaderFinished ? 1.0 : 0.0;
         const active = activeTarget * gate;
+
+        // Scroll progress through the ~4-viewport storytelling range; a bell shape
+        // makes the background wash in around the middle, then recede.
+        const maxScroll = window.innerHeight * 4;
+        const sp = maxScroll > 0 ? Math.min(Math.max((window.pageYOffset || document.documentElement.scrollTop || 0) / maxScroll, 0), 1) : 0;
+        const scrollReveal = window.isProjectOpen ? 0.0 : Math.max(0, 1.0 - Math.abs(sp - 0.45) / 0.3) * gate * 0.5;
 
         // Interpolation douce de la position de la souris (Lerp)
         prevMouse.x = mouse.x;
@@ -344,6 +358,7 @@ export function initWatercolorReveal() {
         gl.uniform2f(rU.uCover, c[0], c[1]);
         gl.uniform3f(rU.uBg, BG_COLOR[0], BG_COLOR[1], BG_COLOR[2]);
         gl.uniform1f(rU.uDisplacement, imageLoaded ? dynamicDisplacement : 0.0);
+        gl.uniform1f(rU.uScrollReveal, imageLoaded ? scrollReveal : 0.0);
         gl.uniform1f(rU.uTime, time);
         gl.uniform2f(rU.uResolution, canvas.width, canvas.height);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
