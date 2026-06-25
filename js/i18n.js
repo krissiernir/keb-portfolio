@@ -13,6 +13,7 @@ function detectDefault() {
 async function loadDict(lang) {
   if (dicts[lang]) return dicts[lang];
   const res = await fetch(`lang/${lang}.json`);
+  if (!res.ok) throw new Error(`i18n: failed to load lang/${lang}.json (${res.status})`);
   dicts[lang] = await res.json();
   return dicts[lang];
 }
@@ -44,7 +45,13 @@ export async function initI18n() {
   await setLang(detectDefault());
   const toggle = document.getElementById('lang-toggle');
   if (toggle) {
-    toggle.addEventListener('click', () => setLang(current === 'is' ? 'en' : 'is'));
+    let switching = false;
+    toggle.addEventListener('click', async () => {
+      if (switching) return;
+      switching = true;
+      try { await setLang(current === 'is' ? 'en' : 'is'); }
+      finally { switching = false; }
+    });
   }
 }
 
