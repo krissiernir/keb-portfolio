@@ -7,7 +7,7 @@ let current = 'en';
 function detectDefault() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (SUPPORTED.includes(saved)) return saved;
-  return (navigator.language || 'en').toLowerCase().startsWith('is') ? 'is' : 'en';
+  return 'is';
 }
 
 async function loadDict(lang) {
