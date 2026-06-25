@@ -174,7 +174,7 @@ function createTarget(gl, w, h) {
 }
 
 export function initWatercolorReveal() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.__watercolorReady) return;
 
     if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) return;
