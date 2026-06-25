@@ -8,7 +8,7 @@
     "cover": "assets/img/projects/ominni-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Heimildarmynd.", "en": "Documentary film." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -22,7 +22,7 @@
     "cover": "assets/img/projects/bjorninn-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Hátíðarherferð í hreyfimyndum.", "en": "Holiday campaign in motion graphics." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -36,7 +36,7 @@
     "cover": "assets/img/projects/sentio-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Efni fyrir samfélagsmiðla og vörumerki.", "en": "Social media and brand content." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -50,7 +50,7 @@
     "cover": "assets/img/projects/sek-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Heimildaþáttaröð.", "en": "Documentary series." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -64,7 +64,7 @@
     "cover": "assets/img/projects/music-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Tónlistarmyndbönd.", "en": "Music videos." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -78,7 +78,7 @@
     "cover": "assets/img/projects/web-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Vefverkefni.", "en": "Web projects." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }
@@ -92,7 +92,7 @@
     "cover": "assets/img/projects/eittlif-cover.jpg",
     "video": "",
     "links": {},
-    "summary":  { "is": "", "en": "" },
+    "summary":  { "is": "Lýðheilsuverkefni með myndefni.", "en": "Public health project with video." },
     "problem":  { "is": "", "en": "" },
     "approach": { "is": "", "en": "" },
     "outcome":  { "is": "", "en": "" }

@@ -38,16 +38,25 @@ export async function initCards() {
         document.getElementById("project-view-meta").textContent =
             [project.role, project.year].filter(Boolean).join(' · ');
         document.getElementById("project-view-summary").textContent = pick(project.summary);
-        document.getElementById("project-view-problem").textContent = pick(project.problem);
-        document.getElementById("project-view-approach").textContent = pick(project.approach);
-        document.getElementById("project-view-outcome").textContent = pick(project.outcome);
+        // Fill each titled section, and hide it while its copy is empty so
+        // unwritten projects don't show bare headings.
+        const setSection = (id, text) => {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            const section = el.closest('.project-section');
+            if (section) section.style.display = text ? '' : 'none';
+        };
+        setSection("project-view-problem", pick(project.problem));
+        setSection("project-view-approach", pick(project.approach));
+        setSection("project-view-outcome", pick(project.outcome));
         const videoEl = document.getElementById("project-view-video");
         videoEl.innerHTML = project.video
             ? `<iframe src="${project.video}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
             : '';
-        const linksEl = document.getElementById("project-view-links");
-        linksEl.innerHTML = Object.entries(project.links || {})
+        const links = Object.entries(project.links || {});
+        document.getElementById("project-view-links").innerHTML = links
             .map(([label, url]) => `<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`).join('');
+        document.getElementById("links-section").style.display = links.length ? '' : 'none';
 
         const scrollEl = document.querySelector('.project-info-scroll');
         if (scrollEl) scrollEl.scrollTop = 0;
