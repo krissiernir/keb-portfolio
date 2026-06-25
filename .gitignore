@@ -2,6 +2,7 @@
 node_modules/
 *.log
 .env
+*.mov
 
 # Secrets — never commit. Templates (*.example) ARE committed.
 .cloudflare.env
