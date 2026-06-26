@@ -348,7 +348,7 @@ export function initWatercolorReveal() {
 
         // Scroll progress through the ~4-viewport storytelling range; a bell shape
         // makes the background wash in around the middle, then recede.
-        const maxScroll = window.innerHeight * 4;
+        const maxScroll = window.innerHeight * 2.5; // matches the intro scrub length (story.js)
         const sp = maxScroll > 0 ? Math.min(Math.max((window.pageYOffset || document.documentElement.scrollTop || 0) / maxScroll, 0), 1) : 0;
         const scrollReveal = window.isProjectOpen ? 0.0 : Math.max(0, 1.0 - Math.abs(sp - 0.45) / 0.3) * gate * 0.5;
 

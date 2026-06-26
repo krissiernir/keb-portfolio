@@ -28,7 +28,7 @@ export function initStory() {
         scrollTrigger: {
             trigger: document.body,
             start: "top top",
-            end: () => "+=" + (window.innerHeight * 4.0),
+            end: () => "+=" + (window.innerHeight * 2.5),
             scrub: 1
         }
     });

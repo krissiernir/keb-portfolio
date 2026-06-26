@@ -52,7 +52,7 @@ body {
 
 #main-content {
 
-    min-height: 760vh; /* scroll : intro (~400vh) → Kunnátta (~430–515vh) → work (~580–665vh) + dwell */
+    min-height: 610vh; /* scroll : intro (~250vh) → Kunnátta (260–345vh) → work (390–475vh) + dwell (max-scroll ≈510vh) */
     visibility: hidden;
 }
 

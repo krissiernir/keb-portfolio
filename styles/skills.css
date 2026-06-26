@@ -16,9 +16,10 @@
     pointer-events: none;
 }
 
-/* Reveal bands (scroll order: intro → kunnátta → work) */
-#skills-anchor { top: 430vh; }   /* Kunnátta fades in right after the intro */
-#work-anchor   { top: 580vh; }   /* work marquee fades in after Kunnátta */
+/* Reveal bands (scroll order: intro → kunnátta → work); tight sequence so the
+   categories come up soon after the intro rather than after dead scroll. */
+#skills-anchor { top: 260vh; }   /* Kunnátta fades in right after the ~2.5vh intro */
+#work-anchor   { top: 390vh; }   /* work marquee fades in after Kunnátta */
 
 #skills {
     position: fixed;

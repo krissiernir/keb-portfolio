@@ -60,14 +60,14 @@ function boot() {
     if (introProjets) {
         introProjets.addEventListener("click", (e) => {
             e.preventDefault();
-            lenis.scrollTo(window.innerHeight * 7.0, { duration: 2 }); // work (third section)
+            lenis.scrollTo(window.innerHeight * 4.9, { duration: 2 }); // work (third section)
         });
     }
     const introSkills = document.getElementById("intro-skills");
     if (introSkills) {
         introSkills.addEventListener("click", (e) => {
             e.preventDefault();
-            lenis.scrollTo(window.innerHeight * 5.4, { duration: 2 }); // kunnátta (second section)
+            lenis.scrollTo(window.innerHeight * 3.6, { duration: 2 }); // kunnátta (second section)
         });
     }
 
