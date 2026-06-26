@@ -92,13 +92,15 @@ export function initStory() {
     // The work marquee is no longer revealed here — it now comes AFTER the
     // Kunnátta section (see js/skills.js work timeline), so the scroll order is
     // intro → kunnátta → work.
+    // Hero statement reveals just after the name settles (was at the very end) —
+    // it is now the opening line, not a trailing bio.
     .to(".bio-word", {
         opacity: 1,
         y: 0,
-        stagger: { each: 0.02, from: "start" },
-        duration: 0.5,
-        ease: "power1.out"
-    }, 3.3);
+        stagger: { each: 0.09, from: "start" },
+        duration: 0.7,
+        ease: "power2.out"
+    }, 1.15);
 
     // Oversized ghost tagline rises in to claim the empty lower-intro, then
     // settles back so it never competes with the bio; geo anchor joins the nav.

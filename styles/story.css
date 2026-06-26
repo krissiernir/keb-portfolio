@@ -62,14 +62,10 @@
 }
 
 #intro-text {
-    position: fixed;
-    top: 14vh;
-    right: 1vw;
-    width: 38vw;
-    z-index: 4;
-    padding: 0 0.5vw;
-    pointer-events: none;
-    visibility: hidden; /* masqué jusqu'à ce que JS découpe le texte en mots (évite le flash) */
+    /* Retired: the tiny top-right tagline was redundant with the oversized ghost
+       tagline (atmosphere.css) and competed with the new hero statement. The
+       statement now leads just after the name (see .bio-section). */
+    display: none;
 }
 
 .intro-paragraph {
