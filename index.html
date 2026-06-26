@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="styles/story.css">
     <link rel="stylesheet" href="styles/project.css">
     <link rel="stylesheet" href="styles/skills.css">
+    <link rel="stylesheet" href="styles/atmosphere.css">
     <link rel="stylesheet" href="styles/cursor.css">
     <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="styles/reel.css">
@@ -45,6 +46,18 @@
         <div class="line"><div class="border"></div></div>
         <div class="line"></div>
     </div>
+
+    <!-- Cinematic atmosphere layers (all pointer-events:none) -->
+    <div class="glow-layer" aria-hidden="true">
+        <div class="glow-orb o1"><i></i></div>
+        <div class="glow-orb o2"><i></i></div>
+        <div class="glow-orb o3"><i></i></div>
+    </div>
+    <div id="intro-tagline-large" aria-hidden="true"><span>Hönnun</span><span>þróun</span><span>framleiðsla</span></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="bar-top" aria-hidden="true"></div>
+    <div class="bar-bottom" aria-hidden="true"></div>
+    <div class="geo-anchor" aria-hidden="true">64.1°N · 21.9°W · Reykjavík — 2026</div>
 
     <div class="top-nav-container">
         <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="Ferilskrá" aria-label="Sækja ferilskrá" data-magnetic="0.4">
@@ -194,7 +207,9 @@
         </section>
 
         <section class="portfolio-wrapper">
-            <div class="cards-container">
+            <div class="marquee-skew">
+                <div class="cards-container">
+                </div>
             </div>
         </section>
 

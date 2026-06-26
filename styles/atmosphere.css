@@ -1,0 +1,129 @@
+/* ─── atmosphere.css ──────────────────────────────────────────────────────────
+   Cinematic depth for the dark canvas — fixes the "feels empty" problem by
+   treating black as a lit, framed, textured SURFACE rather than absence.
+   (Film grain itself is baked into the WebGL shader — see watercolor-reveal.js.)
+     .vignette            — lens framing (also the reduced-motion fallback)
+     .glow-layer/.glow-orb— warm ambient light pools (blend on parent, blur on child)
+     #intro-tagline-large — oversized ghost Fraunces type filling the dead lower-intro
+     .bar-top/.bar-bottom — cinematic letterbox bars (filmmaker signal)
+     .geo-anchor          — mono metadata anchor in a dead corner
+   Everything here is pointer-events:none and reduced-motion / mobile aware.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Lens vignette — frames the whole composition, always on */
+.vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    background: radial-gradient(ellipse 120% 85% at 50% 47%, transparent 38%, rgba(0, 0, 0, 0.52) 100%);
+}
+
+/* Ambient warm glow pools. mix-blend-mode on the parent, filter:blur on the
+   child — never both on one element (Safari drops them otherwise). */
+.glow-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.glow-orb {
+    position: absolute;
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+.glow-orb > i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+.glow-orb.o1 { width: 62vw; height: 62vw; left: -14vw; bottom: -18vw; opacity: 0.18; }
+.glow-orb.o1 > i { background: radial-gradient(circle, rgba(255, 157, 65, 0.72) 0%, transparent 70%); }
+.glow-orb.o2 { width: 46vw; height: 46vw; right: -8vw; top: -12vw; opacity: 0.13; }
+.glow-orb.o2 > i { background: radial-gradient(circle, rgba(255, 184, 120, 0.55) 0%, transparent 70%); }
+.glow-orb.o3 { width: 80vw; height: 80vw; left: 16vw; bottom: -32vw; opacity: 0.10; }
+.glow-orb.o3 > i { background: radial-gradient(circle, rgba(150, 62, 14, 0.6) 0%, transparent 72%); }
+
+/* Oversized ghost tagline — claims the empty lower-intro real estate */
+#intro-tagline-large {
+    position: fixed;
+    left: 3vw;
+    bottom: 6vh;
+    z-index: 3;
+    pointer-events: none;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2.6rem, 8.4vw, 10.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    color: #ff9d41;
+    opacity: 0;
+    will-change: opacity, transform;
+}
+#intro-tagline-large span { display: block; }
+
+/* Cinematic letterbox bars (kept below nav z=100, above content) */
+.bar-top,
+.bar-bottom {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 5vh;
+    background: #080808;
+    z-index: 90;
+    pointer-events: none;
+}
+.bar-top { top: 0; }
+.bar-bottom { bottom: 0; }
+
+/* Mono geo metadata anchor */
+.geo-anchor {
+    position: fixed;
+    right: 2vw;
+    bottom: 6.4vh;
+    z-index: 6;
+    pointer-events: none;
+    font-family: ui-monospace, 'SF Mono', Menlo, 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 157, 65, 0.42);
+    text-align: right;
+    opacity: 0;
+}
+
+/* Marquee skew wrapper (driven by Lenis velocity in cards.js) */
+.marquee-skew { will-change: transform; }
+
+/* Variable-font weight axis for the name shrink (animated in story.js) */
+@property --kweight {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 700;
+}
+#hero-name {
+    font-variation-settings: 'wght' var(--kweight, 700);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    #intro-tagline-large { display: none; } /* the big name already fills phones */
+    .glow-orb > i { filter: blur(58px); }
+    .glow-orb.o3 { display: none; }
+    .bar-top, .bar-bottom { height: 3vh; }
+    .geo-anchor { font-size: 0.58rem; right: 4vw; bottom: 4.5vh; }
+    .vignette { background: radial-gradient(ellipse 130% 92% at 50% 48%, transparent 42%, rgba(0, 0, 0, 0.42) 100%); }
+}
+@media (max-height: 600px) {
+    .bar-top, .bar-bottom { height: 2.5vh; }
+}
+
+/* ── Reduced motion: keep the framing/atmosphere, drop the movement ──────── */
+@media (prefers-reduced-motion: reduce) {
+    .glow-orb { opacity: 0.12; }
+}

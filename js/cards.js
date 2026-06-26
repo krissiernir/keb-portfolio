@@ -30,6 +30,14 @@ export async function initCards() {
     let baseSpeed = 0.5;
     window.isProjectOpen = false;
 
+    // Velocity-reactive skew on the marquee wrapper (physical, "alive" feel).
+    // Skew the wrapper, not the cards, so device-mockup content stays crisp.
+    const skewWrap = document.querySelector('.marquee-skew');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setSkew = (skewWrap && !reduceMotion)
+        ? gsap.quickTo(skewWrap, 'skewX', { duration: 0.5, ease: 'power3' })
+        : null;
+
 
     function pick(field) {
         const lang = window.KEB_LANG || 'en';
@@ -228,6 +236,9 @@ export async function initCards() {
 
     function render() {
         if (window.preloaderFinished) {
+            if (setSkew && window.lenis) {
+                setSkew(gsap.utils.clamp(-5, 5, (window.lenis.velocity || 0) * -0.12));
+            }
             if (!window.isProjectOpen) {
                 let currentSpeed = baseSpeed;
 

@@ -43,6 +43,7 @@ export function initStory() {
         top: topFVH + "vh",
         left: leftFVW + "vw",
         scale: scaleF,
+        "--kweight": 330,   // Fraunces refines from heavy display to light as it migrates
         ease: "none",
         duration: 1
     }, 0)
@@ -98,6 +99,12 @@ export function initStory() {
         duration: 0.5,
         ease: "power1.out"
     }, 3.3);
+
+    // Oversized ghost tagline rises in to claim the empty lower-intro, then
+    // settles back so it never competes with the bio; geo anchor joins the nav.
+    tl.to("#intro-tagline-large", { opacity: 0.1, duration: 0.6, ease: "power1.out" }, 0.8)
+      .to("#intro-tagline-large", { opacity: 0.055, duration: 1.0, ease: "power1.inOut" }, 2.6)
+      .to(".geo-anchor", { opacity: 1, duration: 0.6, ease: "power1.out" }, 3.2);
 
     ScrollTrigger.refresh();
 }

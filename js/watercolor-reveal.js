@@ -140,6 +140,11 @@ void main() {
     vec3 col = mix(uBg, img, reveal);
     col += rim * 0.04;
 
+    // Animated film grain — makes the dark canvas read as film stock, not a void.
+    // Near-zero cost: reuses uTime/vUv we already have, no extra passes.
+    float grain = fract(sin(dot(vUv, vec2(12.9898, 78.233)) + uTime * 0.6) * 43758.5453);
+    col += (grain - 0.5) * 0.05;
+
     gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -350,7 +355,7 @@ export function initWatercolorReveal() {
         // makes the background wash in around the middle, then recede.
         const maxScroll = window.innerHeight * 2.5; // matches the intro scrub length (story.js)
         const sp = maxScroll > 0 ? Math.min(Math.max((window.pageYOffset || document.documentElement.scrollTop || 0) / maxScroll, 0), 1) : 0;
-        const scrollReveal = window.isProjectOpen ? 0.0 : Math.max(0, 1.0 - Math.abs(sp - 0.45) / 0.3) * gate * 0.5;
+        const scrollReveal = window.isProjectOpen ? 0.0 : Math.max(0, 1.0 - Math.abs(sp - 0.45) / 0.3) * gate * 0.7;
 
         // Interpolation douce de la position de la souris (Lerp)
         prevMouse.x = mouse.x;

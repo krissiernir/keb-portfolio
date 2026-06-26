@@ -110,6 +110,11 @@ export async function initPreloader() {
         document.body.style.overflowY = "auto";
         gsap.set(".preloader", { pointerEvents: "none" });
         window.preloaderFinished = true;
+        // Cinematic letterbox iris — "the film begins" (skip under reduced motion)
+        if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+            gsap.from(".bar-top", { yPercent: -100, duration: 1.1, ease: "power3.out" });
+            gsap.from(".bar-bottom", { yPercent: 100, duration: 1.1, ease: "power3.out" });
+        }
         initStory();
         if (window.lenis) window.lenis.start();
     });

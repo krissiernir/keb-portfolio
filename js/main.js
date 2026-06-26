@@ -4,6 +4,7 @@ import { initModal } from './modal.js';
 import { initWatercolorReveal } from './watercolor-reveal.js';
 import { initSkills } from './skills.js';
 import { initCursor } from './cursor.js';
+import { initAtmosphere } from './atmosphere.js';
 
 function boot() {
 
@@ -75,6 +76,7 @@ function boot() {
     initModal();
     initWatercolorReveal();
     initCursor();
+    initAtmosphere();
     initSkills();
     initCards().then(() => {
         initPreloader();
