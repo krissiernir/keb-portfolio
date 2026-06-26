@@ -15,5 +15,14 @@
   "project.approach": "Approach",
   "project.outcome": "Outcome",
   "nav.docs": "documents",
-  "nav.tools": "tools"
+  "nav.tools": "tools",
+  "nav.skills": "skills",
+  "skills.label": "Skills",
+  "skills.statement": "Creative producer in Reykjavík, working across design, film, motion and web.",
+  "skills.cta": "Get in touch",
+  "skills.cat.design": "Design",
+  "skills.cat.motion": "Edit & Motion",
+  "skills.cat.web": "Web & Tech",
+  "skills.cat.production": "Production & Strategy",
+  "skills.tool.pm": "Project management"
 }

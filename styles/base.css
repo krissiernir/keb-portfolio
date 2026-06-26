@@ -52,7 +52,7 @@ body {
 
 #main-content {
 
-    min-height: 540vh; /* fournit la distance de scroll pour la séquence storytelling */
+    min-height: 620vh; /* distance de scroll : séquence intro (~400vh) + section Kunnátta (~450–535vh) + dwell */
     visibility: hidden;
 }
 

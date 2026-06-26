@@ -184,6 +184,9 @@ export function initWatercolorReveal() {
     if (window.__watercolorReady) return;
 
     const isMobile = !!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+    // Touch devices have no cursor, so the mouse-driven reveal sits dead. On those
+    // devices we drive a synthetic wandering "cursor" so the wash flows on its own.
+    const autoDrive = isMobile || !!(window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches);
 
     const canvas = document.createElement('canvas');
     canvas.id = 'watercolor-canvas';
@@ -294,6 +297,25 @@ export function initWatercolorReveal() {
     });
     window.addEventListener('pointerleave', () => { activeTarget = 0.0; });
 
+    let lastTouch = -10.0;
+    if (autoDrive) {
+        const onTouch = (e) => {
+            const t = e.touches && e.touches[0];
+            if (!t) return;
+            targetMouse.x = t.clientX / window.innerWidth;
+            targetMouse.y = 1.0 - t.clientY / window.innerHeight;
+            if (!moved) {
+                mouse.x = targetMouse.x; mouse.y = targetMouse.y;
+                prevMouse.x = mouse.x; prevMouse.y = mouse.y;
+                moved = true;
+            }
+            activeTarget = 1.0;
+            lastTouch = (performance.now() - start) * 0.001;
+        };
+        window.addEventListener('touchstart', onTouch, { passive: true });
+        window.addEventListener('touchmove', onTouch, { passive: true });
+    }
+
     let read = 0;
     let write = 1;
     const start = performance.now();
@@ -302,6 +324,26 @@ export function initWatercolorReveal() {
     function frame() {
         const time = (performance.now() - start) * 0.001;
         const gate = window.preloaderFinished ? 1.0 : 0.0;
+
+        // Touch devices: no cursor, so feed a smooth wandering path (two detuned
+        // sines per axis) that keeps painting the reveal. Yields to real touches
+        // for ~1.2s after the last one so a finger drag still steers the wash.
+        if (autoDrive && gate && (time - lastTouch > 1.2)) {
+            const a = time;
+            // Faster, detuned harmonics → larger brush + more displacement, so the
+            // wash reads as a living current rather than a faint drifting smudge.
+            const ax = 0.5 + 0.34 * Math.sin(a * 0.52) + 0.15 * Math.sin(a * 1.21 + 1.3);
+            const ay = 0.5 + 0.32 * Math.cos(a * 0.43 + 0.6) + 0.15 * Math.cos(a * 1.02 + 2.1);
+            targetMouse.x = Math.min(0.97, Math.max(0.03, ax));
+            targetMouse.y = Math.min(0.97, Math.max(0.03, ay));
+            if (!moved) {
+                mouse.x = targetMouse.x; mouse.y = targetMouse.y;
+                prevMouse.x = mouse.x; prevMouse.y = mouse.y;
+                moved = true;
+            }
+            activeTarget = 1.0;
+        }
+
         const active = activeTarget * gate;
 
         // Scroll progress through the ~4-viewport storytelling range; a bell shape

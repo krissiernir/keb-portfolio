@@ -2,6 +2,7 @@ import { initPreloader } from './preloader.js';
 import { initCards } from './cards.js';
 import { initModal } from './modal.js';
 import { initWatercolorReveal } from './watercolor-reveal.js';
+import { initSkills } from './skills.js';
 
 function boot() {
 
@@ -62,9 +63,17 @@ function boot() {
             lenis.scrollTo(window.innerHeight * 4.0, { duration: 2 });
         });
     }
+    const introSkills = document.getElementById("intro-skills");
+    if (introSkills) {
+        introSkills.addEventListener("click", (e) => {
+            e.preventDefault();
+            lenis.scrollTo(window.innerHeight * 5.2, { duration: 2 });
+        });
+    }
 
     initModal();
     initWatercolorReveal();
+    initSkills();
     initCards().then(() => {
         initPreloader();
     });

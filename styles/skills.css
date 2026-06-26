@@ -1,0 +1,266 @@
+/* ─── skills.css ────────────────────────────────────────────────────────────
+   "Kunnátta / Skills" — a fixed full-viewport section revealed on scroll in its
+   own band (see js/skills.js). Two columns on desktop:
+     .skills-left   — label + bold serif statement + divider + contact CTA
+     .skills-right  — accordion of tool categories (single-open)
+   Adapted from the lukebaffait.fr skills layout into Kristján's orange/cream
+   palette and the device-mockup aesthetic used across the site.
+   ───────────────────────────────────────────────────────────────────────── */
+
+#skills-anchor {
+    position: absolute;
+    top: 450vh;           /* start of the reveal band (after the work marquee) */
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+#skills {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;               /* GSAP autoAlpha takes over at init */
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#skills.is-active {
+    pointer-events: auto;
+}
+
+.skills-inner {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 6vw;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 6vw;
+    align-items: center;
+}
+
+/* ── Left column ───────────────────────────────────────────────────────── */
+.skills-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #ff9d41;
+    margin-bottom: 1.6vh;
+}
+
+.skills-statement {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 2.6vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: #efefef;
+    margin: 0;
+}
+
+.skills-divider {
+    height: 1px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 3.2vh 0 2.6vh;
+}
+
+.skills-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #cfcfcf;
+    transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.skills-cta svg {
+    width: 1.2em;
+    height: 1.2em;
+    stroke: #ff9d41;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.skills-cta:hover {
+    color: #fff;
+    gap: 1.1em;
+}
+
+.skills-cta:hover svg {
+    transform: translateX(4px);
+}
+
+/* ── Right column — accordion ──────────────────────────────────────────── */
+.skills-right {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.skill-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.skill-row-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+    padding: clamp(14px, 2.1vh, 24px) 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: #dcdcdc;
+    transition: color 0.3s ease;
+}
+
+.skill-cat {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.5vw, 2.6rem);
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.skill-row-head:hover .skill-cat,
+.skill-row.is-open .skill-cat {
+    color: #ff9d41;
+}
+
+/* CSS-drawn +/× toggle */
+.skill-plus {
+    position: relative;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+}
+
+.skill-plus::before,
+.skill-plus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: currentColor;
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+}
+
+.skill-plus::before {
+    width: 22px;
+    height: 2px;
+    transform: translate(-50%, -50%);
+}
+
+.skill-plus::after {
+    width: 2px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+}
+
+.skill-row.is-open .skill-plus { color: #ff9d41; }
+.skill-row.is-open .skill-plus::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+
+/* Expanding tools — grid-row 0fr→1fr for a clean height animation */
+.skill-tools-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                opacity 0.4s ease;
+}
+
+.skill-row.is-open .skill-tools-wrap {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.skill-tools {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-bottom: clamp(14px, 2vh, 22px);
+}
+
+.skill-tools span {
+    font-size: clamp(0.8rem, 0.95vw, 1rem);
+    padding: 0.42em 0.95em;
+    border: 1px solid rgba(255, 157, 65, 0.32);
+    border-radius: 999px;
+    color: #cfcfcf;
+    white-space: nowrap;
+    background: rgba(255, 157, 65, 0.04);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .skills-inner {
+        gap: 4vw;
+        grid-template-columns: 0.8fr 1.2fr;
+    }
+}
+
+@media (max-width: 768px) {
+    #skills {
+        align-items: flex-start;
+    }
+    .skills-inner {
+        grid-template-columns: 1fr;
+        gap: clamp(20px, 4vh, 36px);
+        padding: 13vh 6vw 4vh;
+        align-content: start;
+    }
+    .skills-label {
+        margin-bottom: 1vh;
+    }
+    .skills-statement {
+        font-size: clamp(1.35rem, 6.5vw, 2rem);
+        line-height: 1.18;
+    }
+    .skills-divider {
+        margin: 2.2vh 0 0;
+    }
+    .skills-left {
+        /* CTA folds under the statement; divider sits tight on mobile */
+    }
+    .skills-cta {
+        display: none; /* contact lives in the nav/info modal on mobile */
+    }
+    .skill-row-head {
+        padding: clamp(11px, 1.6vh, 18px) 0;
+    }
+    .skill-cat {
+        font-size: clamp(1.25rem, 6vw, 1.9rem);
+    }
+    .skill-plus { width: 18px; height: 18px; }
+    .skill-plus::before { width: 18px; }
+    .skill-plus::after { height: 18px; }
+    .skill-tools span {
+        font-size: clamp(0.78rem, 3.4vw, 0.95rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-tools-wrap,
+    .skill-plus::before,
+    .skill-plus::after,
+    .skills-cta,
+    .skills-cta svg {
+        transition: none;
+    }
+}

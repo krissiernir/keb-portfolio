@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="styles/bio.css">
     <link rel="stylesheet" href="styles/story.css">
     <link rel="stylesheet" href="styles/project.css">
+    <link rel="stylesheet" href="styles/skills.css">
     <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="styles/reel.css">
     <link rel="stylesheet" href="styles/pdf-viewer.css">
@@ -99,6 +100,7 @@
         <a href="#" id="intro-reel-link" data-i18n="nav.reel">showreel</a>
         <a href="#" id="intro-infos" data-i18n="nav.info">info</a>
         <a href="#" id="intro-projets" data-i18n="nav.work">work</a>
+        <a href="#" id="intro-skills" data-i18n="nav.skills">kunnátta</a>
         <a href="gallery.html" id="intro-gallery" data-i18n="nav.gallery">stillur</a>
         <a href="#" id="intro-docs" data-i18n="nav.docs">documents</a>
         <a href="tools.html" target="_blank" rel="noopener" id="intro-outils" data-i18n="nav.tools">tools</a>
@@ -194,6 +196,60 @@
             <div class="cards-container">
             </div>
         </section>
+
+        <div id="skills-anchor" aria-hidden="true"></div>
+        <section id="skills" aria-label="Kunnátta">
+            <div class="skills-inner">
+                <div class="skills-left">
+                    <span class="skills-label" data-i18n="skills.label">Kunnátta</span>
+                    <h2 class="skills-statement" data-i18n="skills.statement">Skapandi framleiðandi í Reykjavík. Ég vinn við hönnun, kvikmyndir, hreyfimyndir og vef.</h2>
+                    <div class="skills-divider"></div>
+                    <button class="skills-cta" id="skills-contact" type="button">
+                        <span data-i18n="skills.cta">Hafðu samband</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="skills-right">
+                    <div class="skill-row is-open">
+                        <button class="skill-row-head" type="button">
+                            <span class="skill-cat" data-i18n="skills.cat.design">Hönnun</span>
+                            <span class="skill-plus" aria-hidden="true"></span>
+                        </button>
+                        <div class="skill-tools-wrap"><div class="skill-tools">
+                            <span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Figma</span>
+                        </div></div>
+                    </div>
+                    <div class="skill-row">
+                        <button class="skill-row-head" type="button">
+                            <span class="skill-cat" data-i18n="skills.cat.motion">Klipping og hreyfimyndir</span>
+                            <span class="skill-plus" aria-hidden="true"></span>
+                        </button>
+                        <div class="skill-tools-wrap"><div class="skill-tools">
+                            <span>Premiere Pro</span><span>After Effects</span>
+                        </div></div>
+                    </div>
+                    <div class="skill-row">
+                        <button class="skill-row-head" type="button">
+                            <span class="skill-cat" data-i18n="skills.cat.web">Vefur og tækni</span>
+                            <span class="skill-plus" aria-hidden="true"></span>
+                        </button>
+                        <div class="skill-tools-wrap"><div class="skill-tools">
+                            <span>WordPress</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GSAP</span>
+                        </div></div>
+                    </div>
+                    <div class="skill-row">
+                        <button class="skill-row-head" type="button">
+                            <span class="skill-cat" data-i18n="skills.cat.production">Framleiðsla og stýring</span>
+                            <span class="skill-plus" aria-hidden="true"></span>
+                        </button>
+                        <div class="skill-tools-wrap"><div class="skill-tools">
+                            <span data-i18n="skills.tool.pm">Verkefnastjórnun</span><span>Meta Business Suite</span><span>Google Workspace</span>
+                        </div></div>
+                    </div>
+                </div>
             </div>
         </section>
 

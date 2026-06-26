@@ -15,5 +15,14 @@
   "project.approach": "Nálgun",
   "project.outcome": "Niðurstaða",
   "nav.docs": "skjöl",
-  "nav.tools": "verkfæri"
+  "nav.tools": "verkfæri",
+  "nav.skills": "kunnátta",
+  "skills.label": "Kunnátta",
+  "skills.statement": "Skapandi framleiðandi í Reykjavík. Ég vinn við hönnun, kvikmyndir, hreyfimyndir og vef.",
+  "skills.cta": "Hafðu samband",
+  "skills.cat.design": "Hönnun",
+  "skills.cat.motion": "Klipping og hreyfimyndir",
+  "skills.cat.web": "Vefur og tækni",
+  "skills.cat.production": "Framleiðsla og stýring",
+  "skills.tool.pm": "Verkefnastjórnun"
 }
