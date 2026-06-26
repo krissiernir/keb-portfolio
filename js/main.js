@@ -3,6 +3,7 @@ import { initCards } from './cards.js';
 import { initModal } from './modal.js';
 import { initWatercolorReveal } from './watercolor-reveal.js';
 import { initSkills } from './skills.js';
+import { initCursor } from './cursor.js';
 
 function boot() {
 
@@ -60,7 +61,7 @@ function boot() {
     if (introProjets) {
         introProjets.addEventListener("click", (e) => {
             e.preventDefault();
-            lenis.scrollTo(window.innerHeight * 4.9, { duration: 2 }); // work (third section)
+            lenis.scrollTo(window.innerHeight * 4.7, { duration: 2 }); // work (third section)
         });
     }
     const introSkills = document.getElementById("intro-skills");
@@ -73,6 +74,7 @@ function boot() {
 
     initModal();
     initWatercolorReveal();
+    initCursor();
     initSkills();
     initCards().then(() => {
         initPreloader();

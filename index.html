@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="styles/story.css">
     <link rel="stylesheet" href="styles/project.css">
     <link rel="stylesheet" href="styles/skills.css">
+    <link rel="stylesheet" href="styles/cursor.css">
     <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="styles/reel.css">
     <link rel="stylesheet" href="styles/pdf-viewer.css">
@@ -46,7 +47,7 @@
     </div>
 
     <div class="top-nav-container">
-        <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="Ferilskrá" aria-label="Sækja ferilskrá">
+        <a href="assets/doc/CV_KristjanErnir_2025-ENG.pdf" target="_blank" id="cv-btn" title="Ferilskrá" aria-label="Sækja ferilskrá" data-magnetic="0.4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -55,7 +56,7 @@
                 <polyline points="10 9 9 9 8 9"></polyline>
             </svg>
         </a>
-        <button id="info-btn">
+        <button id="info-btn" data-magnetic="0.3">
             <span data-i18n="nav.info">Infos</span>
             <div class="icon-wrapper">
                 <div class="icon-container">
@@ -202,9 +203,9 @@
             <div class="skills-inner">
                 <div class="skills-left">
                     <span class="skills-label" data-i18n="skills.label">Kunnátta</span>
-                    <h2 class="skills-statement" data-i18n="skills.statement">Skapandi framleiðandi í Reykjavík. Ég vinn við hönnun, kvikmyndir, hreyfimyndir og vef.</h2>
+                    <h2 class="skills-statement"><span class="skills-statement-inner" data-i18n="skills.statement">Skapandi framleiðandi í Reykjavík. Ég vinn við hönnun, kvikmyndir, hreyfimyndir og vef.</span></h2>
                     <div class="skills-divider"></div>
-                    <button class="skills-cta" id="skills-contact" type="button">
+                    <button class="skills-cta" id="skills-contact" type="button" data-magnetic="0.45">
                         <span data-i18n="skills.cta">Hafðu samband</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>

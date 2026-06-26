@@ -184,7 +184,7 @@ export async function initCards() {
         ScrollTrigger.getAll().forEach(st => st.enable(false, false));
         if (window.lenis) {
             window.lenis.start();
-            window.lenis.scrollTo(window.innerHeight * 4.9, { immediate: true }); // back to the work band
+            window.lenis.scrollTo(window.innerHeight * 4.7, { immediate: true }); // back to the work band
         }
         container.dataset.dockActive = "false";
         const allCards = Array.from(container.querySelectorAll(".card"));

@@ -36,67 +36,51 @@ export function initSkills() {
 
     gsap.set('#skills', { autoAlpha: 0 });
     gsap.set('.skill-row', { autoAlpha: 0, y: 40 });
+    gsap.set('.skills-statement-inner', { yPercent: 110 }); // big-type slide-up reveal
     // Work marquee stays hidden until the work band reveals it (it used to be
     // revealed at the end of the intro in story.js).
     gsap.set('.portfolio-wrapper', { autoAlpha: 0 });
 
     const skillsAnchor = document.getElementById('skills-anchor');
-    const workAnchor = document.getElementById('work-anchor');
-    if (!skillsAnchor || !workAnchor) return;
+    if (!skillsAnchor) return;
 
-    // 1) KUNNÁTTA — the second section: fades the hero/bio out and itself in,
-    //    right after the intro choreography ends.
-    const kt = gsap.timeline({
+    // ONE timeline owns the whole post-intro sequence so no two scrubbed
+    // timelines fight over the same property (e.g. #skills opacity). The range
+    // covers: kunnátta reveal → hold → work reveal.
+    //   ~0.00–0.90  KUNNÁTTA in (hero/bio out, section + big statement + rows in)
+    //   ~0.90–1.70  hold (kunnátta is the front, interactive section)
+    //   ~1.70–2.45  WORK in (kunnátta out, marquee rises from a slight zoom)
+    const tl = gsap.timeline({
         scrollTrigger: {
             trigger: skillsAnchor,
             start: 'top top',
-            end: () => '+=' + (window.innerHeight * 0.85),
+            end: () => '+=' + (window.innerHeight * 2.0),
             scrub: 1,
-            onUpdate: (self) => skills.classList.toggle('is-active', self.progress > 0.45),
-            onLeave: () => skills.classList.add('is-active')
+            // Kunnátta captures pointer events only while it's the front section.
+            onUpdate: (self) => skills.classList.toggle('is-active', self.progress > 0.22 && self.progress < 0.70)
         }
     });
-    kt.to(['#hero-name', '.bio-section'], {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: 'power1.in'
-    }, 0)
-    .to('#skills', {
-        autoAlpha: 1,
-        duration: 0.4,
-        ease: 'power1.out'
-    }, 0.15)
-    .to('.skill-row', {
-        autoAlpha: 1,
-        y: 0,
-        stagger: 0.08,
-        duration: 0.5,
-        ease: 'power2.out'
-    }, 0.3);
 
-    // 2) WORK — the third section: fades Kunnátta out and the marquee in.
-    const wt = gsap.timeline({
-        scrollTrigger: {
-            trigger: workAnchor,
-            start: 'top top',
-            end: () => '+=' + (window.innerHeight * 0.85),
-            scrub: 1,
-            // Hand interactivity from Kunnátta to the marquee as it takes over.
-            onUpdate: (self) => skills.classList.toggle('is-active', self.progress < 0.05),
-            onLeaveBack: () => skills.classList.add('is-active')
+    // KUNNÁTTA in
+    tl.to('#hero-name', { autoAlpha: 0, duration: 0.35, ease: 'power2.in' }, 0)
+      .to('.bio-section', { autoAlpha: 0, y: -50, duration: 0.4, ease: 'power2.in' }, 0)
+      .to('#skills', { autoAlpha: 1, duration: 0.4, ease: 'power1.out' }, 0.12)
+      .fromTo('.skills-inner', { y: 60 }, { y: 0, duration: 0.6, ease: 'power3.out' }, 0.15)
+      .to('.skills-statement-inner', { yPercent: 0, duration: 0.6, ease: 'power4.out' }, 0.25)
+      .to('.skill-row', { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.5, ease: 'power2.out' }, 0.34)
+    // WORK in (after a hold)
+      .to('.skills-inner', { y: -50, duration: 0.5, ease: 'power2.in' }, 1.7)
+      .to('#skills', { autoAlpha: 0, duration: 0.4, ease: 'power1.in' }, 1.75)
+      .fromTo('.portfolio-wrapper',
+          { autoAlpha: 0, y: '45vh', scale: 1.04 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: 'power3.out' }, 1.85);
+
+    // Keep the big-type statement in sync if the language toggles after reveal.
+    document.addEventListener('langchange', () => {
+        if (skills.classList.contains('is-active')) {
+            gsap.set('.skills-statement-inner', { yPercent: 0 });
         }
     });
-    wt.to('#skills', {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: 'power1.in'
-    }, 0)
-    .to('.portfolio-wrapper', {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-    }, 0.15);
 
     ScrollTrigger.refresh();
 }

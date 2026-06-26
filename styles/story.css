@@ -27,6 +27,7 @@
 }
 
 #intro-links a {
+    position: relative;
     color: #dfdfdf;
     text-decoration: none;
     font-size: 1vw;
@@ -37,8 +38,27 @@
     transition: color 0.3s ease;
 }
 
+/* Animated underline wipe on hover */
+#intro-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: #ff9d41;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
 #intro-links a:hover {
     color: #ff9d41;
+}
+
+#intro-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
 }
 
 #intro-text {
