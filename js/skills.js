@@ -30,31 +30,33 @@ export function initSkills() {
         });
     }
 
-    // ── Scroll-driven reveal ─────────────────────────────────────────────
+    // ── Scroll-driven reveal — order is intro → kunnátta → work ──────────
     if (typeof ScrollTrigger === 'undefined' || typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.set('#skills', { autoAlpha: 0 });
     gsap.set('.skill-row', { autoAlpha: 0, y: 40 });
+    // Work marquee stays hidden until the work band reveals it (it used to be
+    // revealed at the end of the intro in story.js).
+    gsap.set('.portfolio-wrapper', { autoAlpha: 0 });
 
-    const anchor = document.getElementById('skills-anchor');
-    if (!anchor) return;
+    const skillsAnchor = document.getElementById('skills-anchor');
+    const workAnchor = document.getElementById('work-anchor');
+    if (!skillsAnchor || !workAnchor) return;
 
-    const tl = gsap.timeline({
+    // 1) KUNNÁTTA — the second section: fades the hero/bio out and itself in,
+    //    right after the intro choreography ends.
+    const kt = gsap.timeline({
         scrollTrigger: {
-            trigger: anchor,
+            trigger: skillsAnchor,
             start: 'top top',
             end: () => '+=' + (window.innerHeight * 0.85),
             scrub: 1,
-            onUpdate: (self) => {
-                // Only capture pointer events once the section is mostly visible,
-                // so it never blocks the intro/marquee underneath it.
-                skills.classList.toggle('is-active', self.progress > 0.45);
-            }
+            onUpdate: (self) => skills.classList.toggle('is-active', self.progress > 0.45),
+            onLeave: () => skills.classList.add('is-active')
         }
     });
-
-    tl.to(['.portfolio-wrapper', '#hero-name', '.bio-section'], {
+    kt.to(['#hero-name', '.bio-section'], {
         autoAlpha: 0,
         duration: 0.4,
         ease: 'power1.in'
@@ -71,6 +73,30 @@ export function initSkills() {
         duration: 0.5,
         ease: 'power2.out'
     }, 0.3);
+
+    // 2) WORK — the third section: fades Kunnátta out and the marquee in.
+    const wt = gsap.timeline({
+        scrollTrigger: {
+            trigger: workAnchor,
+            start: 'top top',
+            end: () => '+=' + (window.innerHeight * 0.85),
+            scrub: 1,
+            // Hand interactivity from Kunnátta to the marquee as it takes over.
+            onUpdate: (self) => skills.classList.toggle('is-active', self.progress < 0.05),
+            onLeaveBack: () => skills.classList.add('is-active')
+        }
+    });
+    wt.to('#skills', {
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: 'power1.in'
+    }, 0)
+    .to('.portfolio-wrapper', {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+    }, 0.15);
 
     ScrollTrigger.refresh();
 }

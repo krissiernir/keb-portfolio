@@ -7,14 +7,18 @@
    palette and the device-mockup aesthetic used across the site.
    ───────────────────────────────────────────────────────────────────────── */
 
-#skills-anchor {
+#skills-anchor,
+#work-anchor {
     position: absolute;
-    top: 450vh;           /* start of the reveal band (after the work marquee) */
     left: 0;
     width: 1px;
     height: 1px;
     pointer-events: none;
 }
+
+/* Reveal bands (scroll order: intro → kunnátta → work) */
+#skills-anchor { top: 430vh; }   /* Kunnátta fades in right after the intro */
+#work-anchor   { top: 580vh; }   /* work marquee fades in after Kunnátta */
 
 #skills {
     position: fixed;

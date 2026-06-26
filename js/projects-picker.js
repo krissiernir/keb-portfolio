@@ -65,6 +65,34 @@
         if (!e.target.closest('.projects-pdf-content')) closePicker();
     });
 
+    // ── Visionneuse PDF : fermeture (bouton Loka + clic extérieur + Échap) ──
+    // pdf-viewer.js câblait ces handlers mais sort tôt (#pdf-trigger absent),
+    // donc on les pose ici, sur le chemin réellement utilisé.
+    const pdfModalEl     = document.getElementById('pdf-modal');
+    const pdfModalContent = pdfModalEl && pdfModalEl.querySelector('.pdf-modal-content');
+    const pdfFrameEl     = document.getElementById('pdf-frame');
+    const pdfCloseBtn    = document.getElementById('pdf-modal-close');
+
+    function closePdf() {
+        if (!pdfModalEl) return;
+        gsap.to(pdfModalContent, {
+            opacity: 0, y: '4vh', duration: 0.4, ease: 'power3.in',
+            onComplete: () => {
+                gsap.set(pdfModalEl, { visibility: 'hidden', pointerEvents: 'none' });
+                if (pdfModalContent) gsap.set(pdfModalContent, { pointerEvents: 'none' });
+                if (pdfFrameEl) pdfFrameEl.data = '';   // décharge le PDF
+            }
+        });
+    }
+
+    pdfCloseBtn && pdfCloseBtn.addEventListener('click', closePdf);
+    pdfModalEl && pdfModalEl.addEventListener('click', (e) => {
+        if (!e.target.closest('.pdf-modal-content')) closePdf();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && pdfModalEl && pdfModalEl.style.visibility === 'visible') closePdf();
+    });
+
     // ── Ouvre la visionneuse PDF existante avec le projet sélectionné ───────
     function openPdf(project) {
         closePicker();

@@ -52,7 +52,7 @@ body {
 
 #main-content {
 
-    min-height: 620vh; /* distance de scroll : séquence intro (~400vh) + section Kunnátta (~450–535vh) + dwell */
+    min-height: 760vh; /* scroll : intro (~400vh) → Kunnátta (~430–515vh) → work (~580–665vh) + dwell */
     visibility: hidden;
 }
 

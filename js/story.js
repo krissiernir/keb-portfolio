@@ -88,12 +88,9 @@ export function initStory() {
         duration: 0.5,
         ease: "power1.out"
     }, 3.2)
-    .to(".portfolio-wrapper", {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-    }, 3.25)
+    // The work marquee is no longer revealed here — it now comes AFTER the
+    // Kunnátta section (see js/skills.js work timeline), so the scroll order is
+    // intro → kunnátta → work.
     .to(".bio-word", {
         opacity: 1,
         y: 0,
